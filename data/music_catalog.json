@@ -1,0 +1,17 @@
+{
+  "lobby_music": {
+	"path": "res://audio/music/PH Instrumental.ogg",
+	"loop": true,
+	"volume": 0.5
+  },
+  "drive_mode_music": {
+	"path": "res://audio/music/TALY Instrumental.ogg",
+	"loop": true,
+	"volume": 0.5
+  },
+  "menu_music": {
+	"path": "res://audio/music/BMB Instrumentale.ogg",
+	"loop": true,
+	"volume": 0.5
+  }
+}

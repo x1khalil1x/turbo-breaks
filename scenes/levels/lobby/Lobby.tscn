@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh5rtvli7p42a"]
+
+[ext_resource type="Script" uid="uid://cau5bhgvw6s83" path="res://scripts/Lobby.gd" id="1"]
+
+[node name="Lobby" type="Node2D"]
+script = ExtResource("1")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Background" type="ColorRect" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.15, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MainContainer" type="VBoxContainer" parent="UI/CenterContainer"]
+layout_mode = 2
+
+[node name="TitleContainer" type="VBoxContainer" parent="UI/CenterContainer/MainContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="UI/CenterContainer/MainContainer/TitleContainer"]
+layout_mode = 2
+text = "TURBO BREAKS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="UI/CenterContainer/MainContainer/TitleContainer"]
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleSpacer" type="Control" parent="UI/CenterContainer/MainContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="UI/CenterContainer/MainContainer"]
+layout_mode = 2
+
+[node name="DriveButton" type="Button" parent="UI/CenterContainer/MainContainer/ButtonContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "Enter Drive Mode"
+
+[node name="FontDemoButton" type="Button" parent="UI/CenterContainer/MainContainer/ButtonContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "Font Showcase"
+
+[node name="ExitButton" type="Button" parent="UI/CenterContainer/MainContainer/ButtonContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+text = "Exit Game"
+
+[connection signal="pressed" from="UI/CenterContainer/MainContainer/ButtonContainer/DriveButton" to="." method="_on_drive_button_pressed"]
+[connection signal="pressed" from="UI/CenterContainer/MainContainer/ButtonContainer/FontDemoButton" to="." method="_on_font_demo_button_pressed"]
+[connection signal="pressed" from="UI/CenterContainer/MainContainer/ButtonContainer/ExitButton" to="." method="_on_exit_button_pressed"]

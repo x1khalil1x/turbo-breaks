@@ -1,0 +1,88 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcvwq4qr8jvt8"]
+
+[ext_resource type="Script" path="res://assets/Tiles/Tilemaps/sideview_camera.gd" id="1_sideview_camera"]
+
+[sub_resource type="TileSet" id="TileSet_sideview"]
+
+[node name="SideViewDraft" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Background" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_sideview")
+format = 2
+layer_0/name = "Background"
+layer_0/enabled = true
+layer_0/modulate = Color(0.7, 0.7, 0.7, 1)
+layer_0/y_sort_enabled = false
+layer_0/y_sort_origin = 0
+layer_0/z_index = -10
+
+[node name="Platforms" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_sideview")
+format = 2
+layer_0/name = "Platforms"
+layer_0/enabled = true
+layer_0/modulate = Color(1, 1, 1, 1)
+layer_0/y_sort_enabled = false
+layer_0/y_sort_origin = 0
+layer_0/z_index = 0
+
+[node name="Foreground" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_sideview")
+format = 2
+layer_0/name = "Foreground"
+layer_0/enabled = true
+layer_0/modulate = Color(1, 1, 1, 1)
+layer_0/y_sort_enabled = false
+layer_0/y_sort_origin = 0
+layer_0/z_index = 10
+
+[node name="Collision" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_sideview")
+format = 2
+layer_0/name = "Collision"
+layer_0/enabled = true
+layer_0/modulate = Color(0, 1, 0, 0.3)
+layer_0/y_sort_enabled = false
+layer_0/y_sort_origin = 0
+layer_0/z_index = 20
+
+[node name="TestMarkers" type="Node2D" parent="."]
+
+[node name="PlayerTestSpawn" type="Marker2D" parent="TestMarkers"]
+position = Vector2(0, -32)
+gizmo_extents = 16.0
+
+[node name="JumpTestMarker" type="Marker2D" parent="TestMarkers"]
+position = Vector2(64, -96)
+gizmo_extents = 8.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Controls" type="VBoxContainer" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -160.0
+offset_right = 280.0
+offset_bottom = -10.0
+
+[node name="PerspectiveInfo" type="Label" parent="UI/Controls"]
+layout_mode = 2
+text = "Side-View Draft - Platformer Style"
+modulate = Color(0.8, 0.8, 0.8, 1)
+
+[node name="Instructions" type="Label" parent="UI/Controls"]
+layout_mode = 2
+text = "WASD: Move Camera
+Mouse Wheel: Zoom
+Click: Place Tiles
+Focus: Platform collision testing
+Markers: Player spawn & jump tests"
+modulate = Color(0.6, 0.6, 0.6, 1)
+
+[node name="CameraController" type="Node" parent="."]
+script = ExtResource("1_sideview_camera") 

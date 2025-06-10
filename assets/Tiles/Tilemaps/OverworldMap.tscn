@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxgp8qw9kdfgh"]
+
+[sub_resource type="TileSet" id="TileSet_overworld"]
+
+[node name="OverworldMap" type="Node2D"]
+
+[node name="Background" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_overworld")
+format = 2
+layer_0/name = "Terrain"
+layer_0/enabled = true
+layer_0/modulate = Color(1, 1, 1, 1)
+layer_0/y_sort_enabled = false
+layer_0/y_sort_origin = 0
+layer_0/z_index = -10
+
+[node name="Midground" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_overworld")
+format = 2
+layer_0/name = "Environment"
+layer_0/enabled = true
+layer_0/modulate = Color(1, 1, 1, 1)
+layer_0/y_sort_enabled = false
+layer_0/y_sort_origin = 0
+layer_0/z_index = 0
+
+[node name="Foreground" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_overworld")
+format = 2
+layer_0/name = "Details"
+layer_0/enabled = true
+layer_0/modulate = Color(1, 1, 1, 1)
+layer_0/y_sort_enabled = false
+layer_0/y_sort_origin = 0
+layer_0/z_index = 10
+
+[node name="Collision" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_overworld")
+format = 2
+layer_0/name = "Collision"
+layer_0/enabled = true
+layer_0/modulate = Color(1, 1, 1, 0.3)
+layer_0/y_sort_enabled = false
+layer_0/y_sort_origin = 0
+layer_0/z_index = 20
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="PlayerSpawn" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, 0)
+gizmo_extents = 32.0
+
+[node name="NPCSpawns" type="Node2D" parent="SpawnPoints"]
+
+[node name="ItemSpawns" type="Node2D" parent="SpawnPoints"]
+
+[node name="MapBounds" type="Node2D" parent="."]
+
+[node name="TopLeft" type="Marker2D" parent="MapBounds"]
+position = Vector2(-512, -512)
+
+[node name="BottomRight" type="Marker2D" parent="MapBounds"]
+position = Vector2(512, 512) 

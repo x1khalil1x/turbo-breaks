@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcvwq4qr8jvt6"]
+
+[ext_resource type="Script" path="res://assets/Tiles/Tilemaps/draft_camera.gd" id="1_draft_camera"]
+
+[sub_resource type="TileSet" id="TileSet_1"]
+
+[node name="TilemapDraft" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_1")
+format = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Controls" type="VBoxContainer" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -120.0
+offset_right = 200.0
+offset_bottom = -10.0
+
+[node name="TilesetInfo" type="Label" parent="UI/Controls"]
+layout_mode = 2
+text = "Draft Tilemap - Ready for Testing"
+modulate = Color(0.8, 0.8, 0.8, 1)
+
+[node name="Instructions" type="Label" parent="UI/Controls"]
+layout_mode = 2
+text = "WASD: Move Camera
+Mouse Wheel: Zoom
+Click: Place Tiles (when tileset loaded)"
+modulate = Color(0.6, 0.6, 0.6, 1)
+
+[node name="CameraController" type="Node" parent="."]
+script = ExtResource("1_draft_camera") 

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://crw20yqv6ymot"
+path="res://.godot/imported/KIRH Instrumental.ogg-bffb0e3815fd3e51ab503b83bfeee66c.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/music/KIRH Instrumental.ogg"
+dest_files=["res://.godot/imported/KIRH Instrumental.ogg-bffb0e3815fd3e51ab503b83bfeee66c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

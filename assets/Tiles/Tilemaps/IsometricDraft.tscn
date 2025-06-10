@@ -1,0 +1,109 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcvwq4qr8jvua"]
+
+[ext_resource type="Script" path="res://assets/Tiles/Tilemaps/isometric_camera.gd" id="1_isometric_camera"]
+
+[sub_resource type="TileSet" id="TileSet_isometric"]
+
+[node name="IsometricDraft" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+
+[node name="Base" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_isometric")
+format = 2
+layer_0/name = "Ground"
+layer_0/enabled = true
+layer_0/modulate = Color(1, 1, 1, 1)
+layer_0/y_sort_enabled = false
+layer_0/y_sort_origin = 0
+layer_0/z_index = -10
+
+[node name="Objects" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_isometric")
+format = 2
+layer_0/name = "Objects"
+layer_0/enabled = true
+layer_0/modulate = Color(1, 1, 1, 1)
+layer_0/y_sort_enabled = true
+layer_0/y_sort_origin = 16
+layer_0/z_index = 0
+
+[node name="Elevation" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_isometric")
+format = 2
+layer_0/name = "Elevation"
+layer_0/enabled = true
+layer_0/modulate = Color(1, 1, 1, 1)
+layer_0/y_sort_enabled = true
+layer_0/y_sort_origin = 0
+layer_0/z_index = 10
+
+[node name="Collision" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_isometric")
+format = 2
+layer_0/name = "Collision"
+layer_0/enabled = true
+layer_0/modulate = Color(1, 1, 0, 0.3)
+layer_0/y_sort_enabled = false
+layer_0/y_sort_origin = 0
+layer_0/z_index = 20
+
+[node name="GridHelper" type="Node2D" parent="."]
+
+[node name="IsometricGrid" type="Line2D" parent="GridHelper"]
+width = 1.0
+default_color = Color(0.5, 0.5, 0.5, 0.3)
+
+[node name="TestMarkers" type="Node2D" parent="."]
+
+[node name="CenterMarker" type="Marker2D" parent="TestMarkers"]
+position = Vector2(0, 0)
+gizmo_extents = 16.0
+
+[node name="DiamondCorners" type="Node2D" parent="TestMarkers"]
+
+[node name="TopCorner" type="Marker2D" parent="TestMarkers/DiamondCorners"]
+position = Vector2(0, -32)
+gizmo_extents = 8.0
+
+[node name="RightCorner" type="Marker2D" parent="TestMarkers/DiamondCorners"]
+position = Vector2(32, 0)
+gizmo_extents = 8.0
+
+[node name="BottomCorner" type="Marker2D" parent="TestMarkers/DiamondCorners"]
+position = Vector2(0, 32)
+gizmo_extents = 8.0
+
+[node name="LeftCorner" type="Marker2D" parent="TestMarkers/DiamondCorners"]
+position = Vector2(-32, 0)
+gizmo_extents = 8.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Controls" type="VBoxContainer" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -180.0
+offset_right = 300.0
+offset_bottom = -10.0
+
+[node name="PerspectiveInfo" type="Label" parent="UI/Controls"]
+layout_mode = 2
+text = "Isometric Draft - 2.5D Style"
+modulate = Color(0.8, 0.8, 0.8, 1)
+
+[node name="Instructions" type="Label" parent="UI/Controls"]
+layout_mode = 2
+text = "WASD: Move Camera
+Mouse Wheel: Zoom
+Click: Place Tiles
+Focus: Y-Sort depth layering
+Diamond markers show isometric grid
+Q/E: Rotate grid helper (planned)"
+modulate = Color(0.6, 0.6, 0.6, 1)
+
+[node name="CameraController" type="Node" parent="."]
+script = ExtResource("1_isometric_camera") 
