@@ -1,11 +1,10 @@
 extends Node
 
-# Singleton for managing scene transitions
-# Add this as an AutoLoad in Project Settings
 
 signal scene_changed(scene_name: String)
 
 var current_scene: Node = null
+var player_spawn_position: Vector2 = Vector2.ZERO
 
 func _ready():
 	print("SceneManager: Ready")
@@ -24,51 +23,52 @@ func change_scene(path: String):
 	print("SceneManager: change_scene called with path:", path)
 	change_scene_to_file(path)
 
+func change_scene_with_position(path: String, spawn_position: Vector2 = Vector2.ZERO):
+	print("SceneManager: change_scene_with_position - ", path, " at ", spawn_position)
+	player_spawn_position = spawn_position
+	change_scene_to_file(path)
+
 func _deferred_change_scene(path: String):
-	print("SceneManager: _deferred_change_scene starting for:", path)
+	print("SceneManager: Loading scene: ", path)
 	
-	# Check if file exists
-	if not FileAccess.file_exists(path):
-		print("SceneManager: ERROR - Scene file does not exist:", path)
-		return
-	
-	# Free the current scene
+	# Free current scene
 	if current_scene:
-		print("SceneManager: Freeing current scene:", current_scene.name)
 		current_scene.free()
 	
-	# Load and instantiate the new scene
-	print("SceneManager: Loading new scene...")
+	# Load new scene
 	var new_scene = load(path)
 	if not new_scene:
-		print("SceneManager: ERROR - Failed to load scene:", path)
+		print("SceneManager: ERROR - Failed to load scene: ", path)
 		return
 	
-	print("SceneManager: Scene loaded successfully, instantiating...")
 	current_scene = new_scene.instantiate()
-	if not current_scene:
-		print("SceneManager: ERROR - Failed to instantiate scene")
-		return
-	
-	print("SceneManager: Scene instantiated successfully:", current_scene.name)
-	
-	# Add it to the scene tree
-	print("SceneManager: Adding scene to tree...")
 	get_tree().root.add_child(current_scene)
-	print("SceneManager: Scene added to tree successfully")
-	
-	print("SceneManager: Setting as current scene...")
 	get_tree().current_scene = current_scene
-	print("SceneManager: Current scene set successfully")
 	
-	print("SceneManager: Scene change completed to:", current_scene.name)
-	# Emit signal
-	scene_changed.emit(path.get_file().get_basename())
-	print("SceneManager: Signal emitted")
+	# Position player if spawn position specified
+	if player_spawn_position != Vector2.ZERO:
+		call_deferred("position_player_in_new_scene")
+
+func position_player_in_new_scene():
+	await get_tree().process_frame  # Wait for scene to be fully ready
+	
+	var player = find_player_in_scene()
+	if player:
+		player.global_position = player_spawn_position
+		print("SceneManager: Player positioned at: ", player_spawn_position)
+		player_spawn_position = Vector2.ZERO
+	else:
+		print("SceneManager: WARNING - No player found in new scene!")
+
+func find_player_in_scene() -> Node:
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		return players[0]
+	return null
 
 func change_scene_to_lobby():
 	print("SceneManager: change_scene_to_lobby called")
-	change_scene_to_file("res://scenes/lobby/Lobby.tscn")
+	change_scene_to_file("res://scenes/levels/lobby/Lobby.tscn")
 
 func change_scene_to_drive_mode():
 	print("SceneManager: change_scene_to_drive_mode called")

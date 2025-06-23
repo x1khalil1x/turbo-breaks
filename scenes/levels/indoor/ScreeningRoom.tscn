@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=4 uid="uid://l7r4y0m6p9q3"]
+
+[ext_resource type="TileSet" uid="uid://u0e54j4qwyhk" path="res://scenes/environment/ModernRoomBuilder.tres" id="1_floor"]
+[ext_resource type="PackedScene" uid="uid://da0dvw2ufatad" path="res://scenes/components/Doorway.tscn" id="2_doorway"]
+[ext_resource type="PackedScene" uid="uid://djnsfda2lxwrh" path="res://scenes/characters/Player.tscn" id="3_player"]
+[ext_resource type="Script" uid="uid://cdsenn5sovtt1" path="res://scripts/managers/top_down_camera.gd" id="4_camera"]
+[ext_resource type="PackedScene" uid="uid://dx72egemyvj34" path="res://scenes/UI/GameUI.tscn" id="5_gameui"]
+[ext_resource type="Script" path="res://scripts/indoor_scene.gd" id="6_script"]
+
+[node name="ScreeningRoom" type="Node2D"]
+script = ExtResource("6_script")
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Floor" type="TileMapLayer" parent="Environment"]
+z_index = -1
+tile_set = ExtResource("1_floor")
+
+[node name="Walls" type="TileMapLayer" parent="Environment"]
+tile_set = ExtResource("1_floor")
+
+[node name="Seating" type="TileMapLayer" parent="Environment"]
+z_index = 1
+y_sort_enabled = true
+tile_set = ExtResource("1_floor")
+
+[node name="Ceiling" type="TileMapLayer" parent="Environment"]
+z_index = 2
+tile_set = ExtResource("1_floor")
+
+[node name="Collision" type="TileMapLayer" parent="Environment"]
+visible = false
+tile_set = ExtResource("1_floor")
+
+[node name="Interactions" type="Node2D" parent="."]
+
+[node name="Doorways" type="Node2D" parent="Interactions"]
+
+[node name="Exit" parent="Interactions/Doorways" instance=ExtResource("2_doorway")]
+position = Vector2(540, 600)
+target_scene = "res://scenes/levels/indoor/MainBuilding.tscn"
+target_position = Vector2(880, 240)
+doorway_id = "screening_room_exit"
+
+[node name="NPCs" type="Node2D" parent="Interactions"]
+
+[node name="Items" type="Node2D" parent="Interactions"]
+
+[node name="AVEquipment" type="Node2D" parent="Interactions/Items"]
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(540, 360)
+acceleration = 1000.0
+friction = 800.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(540, 360)
+zoom = Vector2(0.9, 0.9)
+script = ExtResource("4_camera")
+
+[node name="UI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="GameUi" parent="UI" instance=ExtResource("5_gameui")]
+
+[node name="DebugBounds" type="Node2D" parent="."]
+
+[node name="SceneBorder" type="Line2D" parent="DebugBounds"]
+points = PackedVector2Array(0, 0, 1080, 0, 1080, 720, 0, 720, 0, 0)
+width = 2.0
+default_color = Color(0, 1, 1, 0.5) 

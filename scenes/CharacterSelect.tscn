@@ -1,0 +1,215 @@
+[gd_scene load_steps=4 format=3 uid="uid://sx7ee3grbffy"]
+
+[ext_resource type="Shader" uid="uid://dcp7bmj8qktev" path="res://assets/shaders/character_select_background.gdshader" id="1_shader"]
+[ext_resource type="Script" uid="uid://bhxhbk0r2lg0s" path="res://scripts/character_select.gd" id="3_script"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+shader = ExtResource("1_shader")
+
+[node name="CharacterSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_script")
+
+[node name="Background" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_1")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.2, 1)
+
+[node name="MainContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPanel" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="CharacterPortrait" type="Control" parent="MainContainer/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+
+[node name="PortraitFrame" type="NinePatchRect" parent="MainContainer/LeftPanel/CharacterPortrait"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterSprite" type="Sprite2D" parent="MainContainer/LeftPanel/CharacterPortrait/PortraitFrame"]
+position = Vector2(120, 150)
+scale = Vector2(2, 2)
+
+[node name="CharacterInfo" type="VBoxContainer" parent="MainContainer/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="NamePanel" type="Panel" parent="MainContainer/LeftPanel/CharacterInfo"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NameLabel" type="Label" parent="MainContainer/LeftPanel/CharacterInfo/NamePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Character Name"
+horizontal_alignment = 1
+
+[node name="StatsPanel" type="Panel" parent="MainContainer/LeftPanel/CharacterInfo"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatsGrid" type="GridContainer" parent="MainContainer/LeftPanel/CharacterInfo/StatsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="LevelLabel" type="Label" parent="MainContainer/LeftPanel/CharacterInfo/StatsPanel/StatsGrid"]
+layout_mode = 2
+text = "Level:"
+
+[node name="LevelValue" type="Label" parent="MainContainer/LeftPanel/CharacterInfo/StatsPanel/StatsGrid"]
+layout_mode = 2
+text = "1"
+
+[node name="ExpLabel" type="Label" parent="MainContainer/LeftPanel/CharacterInfo/StatsPanel/StatsGrid"]
+layout_mode = 2
+text = "EXP:"
+
+[node name="ExpValue" type="Label" parent="MainContainer/LeftPanel/CharacterInfo/StatsPanel/StatsGrid"]
+layout_mode = 2
+text = "0/100"
+
+[node name="RightPanel" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="EquipmentSection" type="VBoxContainer" parent="MainContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+
+[node name="EquipmentHeader" type="Label" parent="MainContainer/RightPanel/EquipmentSection"]
+layout_mode = 2
+text = "EQUIPMENT"
+horizontal_alignment = 1
+
+[node name="EquipmentGrid" type="GridContainer" parent="MainContainer/RightPanel/EquipmentSection"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 3
+
+[node name="WeaponSlot" type="Panel" parent="MainContainer/RightPanel/EquipmentSection/EquipmentGrid"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="WeaponIcon" type="Sprite2D" parent="MainContainer/RightPanel/EquipmentSection/EquipmentGrid/WeaponSlot"]
+position = Vector2(40, 40)
+
+[node name="ArmorSlot" type="Panel" parent="MainContainer/RightPanel/EquipmentSection/EquipmentGrid"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="ArmorIcon" type="Sprite2D" parent="MainContainer/RightPanel/EquipmentSection/EquipmentGrid/ArmorSlot"]
+position = Vector2(40, 40)
+
+[node name="AccessorySlot" type="Panel" parent="MainContainer/RightPanel/EquipmentSection/EquipmentGrid"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="AccessoryIcon" type="Sprite2D" parent="MainContainer/RightPanel/EquipmentSection/EquipmentGrid/AccessorySlot"]
+position = Vector2(40, 40)
+
+[node name="ModuleSection" type="VBoxContainer" parent="MainContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="ModuleHeader" type="Label" parent="MainContainer/RightPanel/ModuleSection"]
+layout_mode = 2
+text = "CHIP MODULES"
+horizontal_alignment = 1
+
+[node name="ModuleContainer" type="HBoxContainer" parent="MainContainer/RightPanel/ModuleSection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AttackChip" type="Panel" parent="MainContainer/RightPanel/ModuleSection/ModuleContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="AttackChipIcon" type="Sprite2D" parent="MainContainer/RightPanel/ModuleSection/ModuleContainer/AttackChip"]
+position = Vector2(30, 30)
+
+[node name="DefenseChip" type="Panel" parent="MainContainer/RightPanel/ModuleSection/ModuleContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="DefenseChipIcon" type="Sprite2D" parent="MainContainer/RightPanel/ModuleSection/ModuleContainer/DefenseChip"]
+position = Vector2(30, 30)
+
+[node name="UtilityChip" type="Panel" parent="MainContainer/RightPanel/ModuleSection/ModuleContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="UtilityChipIcon" type="Sprite2D" parent="MainContainer/RightPanel/ModuleSection/ModuleContainer/UtilityChip"]
+position = Vector2(30, 30)
+
+[node name="NavigationPanel" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BackButton" type="Button" parent="NavigationPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BACK"
+
+[node name="ConfirmButton" type="Button" parent="NavigationPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CONFIRM"
+
+[node name="CreateButton" type="Button" parent="NavigationPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CREATE NEW"

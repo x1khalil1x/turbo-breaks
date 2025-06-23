@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://bh5rtvli7p42a"]
+[gd_scene load_steps=6 format=3 uid="uid://bh5rtvli7p42a"]
 
-[ext_resource type="Script" uid="uid://cau5bhgvw6s83" path="res://scripts/Lobby.gd" id="1"]
+[ext_resource type="Script" uid="uid://d2bonsdg8ywti" path="res://scripts/Lobby.gd" id="1"]
+[ext_resource type="Shader" uid="uid://bq5y765jh570d" path="res://assets/shaders/menu_background.gdshader" id="2"]
+[ext_resource type="Texture2D" uid="uid://bm3b1vkvvp7qe" path="res://assets/saude2.png" id="3_uep5v"]
+[ext_resource type="PackedScene" uid="uid://csqm665n8ygu7" path="res://scenes/UI/VolumeControl.tscn" id="4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_menu"]
+shader = ExtResource("2")
+shader_parameter/speed = 0.088
+shader_parameter/wave_strength = 0.01
+shader_parameter/direction = Vector2(0.5, -0.2)
+shader_parameter/background_texture = ExtResource("3_uep5v")
+shader_parameter/fade_alpha = 1.0
+shader_parameter/pixel_size = 0.004
+shader_parameter/palette_size = 8
 
 [node name="Lobby" type="Node2D"]
 script = ExtResource("1")
@@ -8,10 +21,10 @@ script = ExtResource("1")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Background" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_menu")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.05, 0.05, 0.15, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="UI"]
 anchors_preset = 15
@@ -46,18 +59,20 @@ layout_mode = 2
 [node name="DriveButton" type="Button" parent="UI/CenterContainer/MainContainer/ButtonContainer"]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
-text = "Enter Drive Mode"
+text = "Enter AMF Track Hub"
 
-[node name="FontDemoButton" type="Button" parent="UI/CenterContainer/MainContainer/ButtonContainer"]
+[node name="ExploreButton" type="Button" parent="UI/CenterContainer/MainContainer/ButtonContainer"]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
-text = "Font Showcase"
+text = "Explore Hype City"
 
 [node name="ExitButton" type="Button" parent="UI/CenterContainer/MainContainer/ButtonContainer"]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 text = "Exit Game"
 
+[node name="VolumeControl" parent="UI" instance=ExtResource("4")]
+
 [connection signal="pressed" from="UI/CenterContainer/MainContainer/ButtonContainer/DriveButton" to="." method="_on_drive_button_pressed"]
-[connection signal="pressed" from="UI/CenterContainer/MainContainer/ButtonContainer/FontDemoButton" to="." method="_on_font_demo_button_pressed"]
+[connection signal="pressed" from="UI/CenterContainer/MainContainer/ButtonContainer/ExploreButton" to="." method="_on_font_demo_button_pressed"]
 [connection signal="pressed" from="UI/CenterContainer/MainContainer/ButtonContainer/ExitButton" to="." method="_on_exit_button_pressed"]

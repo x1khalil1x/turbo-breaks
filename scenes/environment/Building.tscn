@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/building.png" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/components/Doorway.tscn" id="2"]
+
+[sub_resource type="RectangleShape2D" id="wall_shape"]
+size = Vector2(128, 96)  # Building walls
+
+[sub_resource type="RectangleShape2D" id="roof_shape"] 
+size = Vector2(128, 32)  # Roof overhang
+
+[node name="Building" type="Node2D"]
+
+# VISUAL LAYER (behind player)
+[node name="BuildingBase" type="Sprite2D" parent="."]
+z_index = -1  # Behind player
+texture = ExtResource("1")
+
+# COLLISION LAYER (walls player can't walk through)
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="WallCollision" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, 16)  # Offset for walls only
+shape = SubResource("wall_shape")
+
+# ROOF LAYER (player can walk under)
+[node name="Roof" type="Sprite2D" parent="."]
+z_index = 1  # In front of player when behind building
+texture = ExtResource("roof_texture")
+position = Vector2(0, -48)
+
+# DOORWAY (interactive)
+[node name="FrontDoor" parent="." instance=ExtResource("2")]
+position = Vector2(0, 48)
+target_scene = "res://scenes/indoor/house_interior.tscn" 

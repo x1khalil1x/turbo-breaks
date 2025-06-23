@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://da0dvw2ufatad"]
+
+[ext_resource type="Script" uid="uid://chfewdhfsj8l4" path="res://scenes/components/Doorway.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cgml7nkdvenwv" path="res://assets/collision_tile_pink32.png" id="2_eh47x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_28tt3"]
+size = Vector2(39.5, 32.25)
+
+[node name="Doorway" type="Area2D"]
+script = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_28tt3")
+
+[node name="Node2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(16, 15)
+texture = ExtResource("2_eh47x")

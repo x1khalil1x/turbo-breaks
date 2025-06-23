@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvonmnf4pw1t0"]
+
+[ext_resource type="PackedScene" uid="uid://djnsfda2lxwrh" path="res://scenes/characters/Player.tscn" id="1_player"]
+[ext_resource type="Script" uid="uid://cdsenn5sovtt1" path="res://scripts/managers/top_down_camera.gd" id="2_camera"]
+[ext_resource type="PackedScene" uid="uid://dx72egemyvj34" path="res://scenes/UI/GameUI.tscn" id="3_gameui"]
+
+[node name="SceneTemplate" type="Node2D"]
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="TileMapLayers" type="Node2D" parent="Environment"]
+
+[node name="Ground" type="TileMapLayer" parent="Environment/TileMapLayers"]
+z_index = -1
+
+[node name="Buildings" type="TileMapLayer" parent="Environment/TileMapLayers"]
+
+[node name="Decoration" type="TileMapLayer" parent="Environment/TileMapLayers"]
+z_index = 1
+y_sort_enabled = true
+
+[node name="Collision" type="TileMapLayer" parent="Environment/TileMapLayers"]
+visible = false
+z_index = 10
+
+[node name="Interactions" type="Node2D" parent="."]
+
+[node name="Doorways" type="Node2D" parent="Interactions"]
+
+[node name="NPCs" type="Node2D" parent="Interactions"]
+
+[node name="Items" type="Node2D" parent="Interactions"]
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+visible = false
+position = Vector2(540, 360)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+position = Vector2(540, 360)
+script = ExtResource("2_camera")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="GameUi" parent="UI" instance=ExtResource("3_gameui")]

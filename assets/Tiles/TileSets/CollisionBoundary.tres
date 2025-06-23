@@ -1,0 +1,14 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://b2op8nojocdhb"]
+
+[ext_resource type="Texture2D" uid="uid://cgml7nkdvenwv" path="res://assets/collision_tile_pink32.png" id="1_ew35d"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8edaq"]
+texture = ExtResource("1_ew35d")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 2
+sources/2 = SubResource("TileSetAtlasSource_8edaq")

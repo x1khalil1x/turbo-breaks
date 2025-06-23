@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=4 uid="uid://h4n6v9w1k8m5"]
+
+[ext_resource type="TileSet" uid="uid://bw8tce3wsj0o5" path="res://assets/Tiles/TileSets/OutdoorGround.tres" id="1_ground"]
+[ext_resource type="TileSet" uid="uid://cm8utuv5q08c5" path="res://assets/Tiles/TileSets/Buildings.tres" id="2_buildings"]
+[ext_resource type="TileSet" uid="uid://c3qxfqxylxrci" path="res://assets/Tiles/TileSets/OutdoorDecor.tres" id="3_decor"]
+[ext_resource type="TileSet" uid="uid://b2op8nojocdhb" path="res://assets/Tiles/TileSets/CollisionBoundary.tres" id="4_collision"]
+[ext_resource type="PackedScene" uid="uid://da0dvw2ufatad" path="res://scenes/components/Doorway.tscn" id="5_doorway"]
+[ext_resource type="PackedScene" uid="uid://djnsfda2lxwrh" path="res://scenes/characters/Player.tscn" id="6_player"]
+[ext_resource type="Script" uid="uid://cdsenn5sovtt1" path="res://scripts/managers/top_down_camera.gd" id="7_camera"]
+[ext_resource type="PackedScene" uid="uid://dx72egemyvj34" path="res://scenes/UI/GameUI.tscn" id="8_gameui"]
+[ext_resource type="Script" uid="uid://c3aabap7dxol7" path="res://scripts/outdoor_scene.gd" id="9_script"]
+
+[node name="SouthEast" type="Node2D"]
+script = ExtResource("9_script")
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Ground" type="TileMapLayer" parent="Environment"]
+z_index = -1
+tile_set = ExtResource("1_ground")
+
+[node name="Buildings" type="TileMapLayer" parent="Environment"]
+tile_set = ExtResource("2_buildings")
+
+[node name="Decoration" type="TileMapLayer" parent="Environment"]
+z_index = 1
+y_sort_enabled = true
+tile_set = ExtResource("3_decor")
+
+[node name="Collision" type="TileMapLayer" parent="Environment"]
+visible = false
+tile_set = ExtResource("4_collision")
+
+[node name="Interactions" type="Node2D" parent="."]
+
+[node name="Doorways" type="Node2D" parent="Interactions"]
+
+[node name="NorthBorder" parent="Interactions/Doorways" instance=ExtResource("5_doorway")]
+position = Vector2(540, 40)
+target_scene = "res://scenes/levels/outdoor/East.tscn"
+target_position = Vector2(540, 680)
+doorway_id = "southeast_to_east"
+
+[node name="WestBorder" parent="Interactions/Doorways" instance=ExtResource("5_doorway")]
+position = Vector2(40, 360)
+target_scene = "res://scenes/levels/outdoor/South.tscn"
+target_position = Vector2(1040, 360)
+doorway_id = "southeast_to_south"
+
+[node name="NPCs" type="Node2D" parent="Interactions"]
+
+[node name="Items" type="Node2D" parent="Interactions"]
+
+[node name="Player" parent="." instance=ExtResource("6_player")]
+position = Vector2(540, 360)
+acceleration = 1000.0
+friction = 800.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(540, 360)
+zoom = Vector2(0.9, 0.9)
+script = ExtResource("7_camera")
+
+[node name="UI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="GameUi" parent="UI" instance=ExtResource("8_gameui")]
+
+[node name="DebugBounds" type="Node2D" parent="."]
+
+[node name="SceneBorder" type="Line2D" parent="DebugBounds"]
+points = PackedVector2Array(0, 0, 1080, 0, 1080, 720, 0, 720, 0, 0)
+width = 2.0
+default_color = Color(1, 0, 1, 0.5) 

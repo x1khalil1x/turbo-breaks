@@ -146,12 +146,12 @@ Create **base character templates** with standardized:
 ```lua
 -- Aseprite Script Template
 function exportCharacterLayers()
-    local sprite = app.activeSprite
-    for i, layer in ipairs(sprite.layers) do
-        if layer.isGroup then
-            exportLayerGroup(layer)
-        end
-    end
+	local sprite = app.activeSprite
+	for i, layer in ipairs(sprite.layers) do
+		if layer.isGroup then
+			exportLayerGroup(layer)
+		end
+	end
 end
 ```
 
@@ -178,10 +178,10 @@ extends Node2D
 @export var hair_sprite: AnimatedSprite2D
 
 func change_clothing(clothing_id: String):
-    clothing_sprite.sprite_frames = load("res://characters/clothing/" + clothing_id + ".tres")
-    
+	clothing_sprite.sprite_frames = load("res://characters/clothing/" + clothing_id + ".tres")
+	
 func change_hair(hair_id: String):
-    hair_sprite.sprite_frames = load("res://characters/hair/" + hair_id + ".tres")
+	hair_sprite.sprite_frames = load("res://characters/hair/" + hair_id + ".tres")
 ```
 
 ## Asset Organization and Performance

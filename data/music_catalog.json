@@ -10,7 +10,7 @@
 	"volume": 0.5
   },
   "menu_music": {
-	"path": "res://audio/music/BMB Instrumentale.ogg",
+	"path": "res://audio/music/BMB Instrumental.ogg",
 	"loop": true,
 	"volume": 0.5
   }
