@@ -1,0 +1,20 @@
+[gd_resource type="SceneMapData" format=3]
+
+[resource]
+zone_id = "south"
+display_name = "Southern Quarter"
+scene_path = "res://scenes/levels/outdoor/South.tscn"
+map_position = Vector2(1, 2)
+biome_theme = "urban"
+thumbnail_path = "res://assets/cartography/zone_thumbnails/south.png"
+discovery_radius = 32.0
+is_hub_location = false
+connected_zones = Array[String](["center", "southeast", "southwest"])
+requires_story_progress = false
+has_indoor_areas = true
+has_doorways = true
+recommended_level = 2
+ambient_music = "res://audio/music/exploration/urban_ambient.ogg"
+exploration_music = "res://audio/music/exploration/south_district.ogg"
+zone_description = "Industrial and residential area with a mix of workshops and living spaces."
+development_notes = "Connects center to southern corner zones, potential for varied gameplay areas." 

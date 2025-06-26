@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8h2k4j6v1x30"]
+
+[ext_resource type="PackedScene" uid="uid://b8jhkl5xc7v9p" path="res://scenes/UI/shared/BaseUIPanel.tscn" id="1_7y4k2"]
+[ext_resource type="Script" path="res://scripts/ui/notification_toast.gd" id="2_5m1n8"]
+
+[node name="NotificationToast" instance=ExtResource("1_7y4k2")]
+layout_mode = 0
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 80.0
+panel_title = "Notification"
+show_header = false
+show_close_button = false
+fade_in_duration = 0.25
+slide_direction = "right"
+script = ExtResource("2_5m1n8")
+
+[node name="NotificationContent" type="HBoxContainer" parent="ContentContainer/Content/Body"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="IconContainer" type="Control" parent="ContentContainer/Content/Body/NotificationContent"]
+layout_mode = 2
+custom_minimum_size = Vector2(32, 32)
+
+[node name="Icon" type="TextureRect" parent="ContentContainer/Content/Body/NotificationContent/IconContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MessageContainer" type="VBoxContainer" parent="ContentContainer/Content/Body/NotificationContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="ContentContainer/Content/Body/NotificationContent/MessageContainer"]
+layout_mode = 2
+text = "Notification Title"
+
+[node name="Message" type="Label" parent="ContentContainer/Content/Body/NotificationContent/MessageContainer"]
+layout_mode = 2
+text = "Notification message content goes here."
+autowrap_mode = 2
+
+[node name="ActionContainer" type="VBoxContainer" parent="ContentContainer/Content/Body/NotificationContent"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="ContentContainer/Content/Body/NotificationContent/ActionContainer"]
+layout_mode = 2
+text = "×" 

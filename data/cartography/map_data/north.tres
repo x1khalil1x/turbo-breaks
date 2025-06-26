@@ -1,0 +1,20 @@
+[gd_resource type="SceneMapData" format=3]
+
+[resource]
+zone_id = "north"
+display_name = "Northern Heights"
+scene_path = "res://scenes/levels/outdoor/North.tscn"
+map_position = Vector2(1, 0)
+biome_theme = "urban"
+thumbnail_path = "res://assets/cartography/zone_thumbnails/north.png"
+discovery_radius = 32.0
+is_hub_location = false
+connected_zones = Array[String](["center", "northeast", "northwest"])
+requires_story_progress = false
+has_indoor_areas = true
+has_doorways = true
+recommended_level = 2
+ambient_music = "res://audio/music/exploration/urban_ambient.ogg"
+exploration_music = "res://audio/music/exploration/north_district.ogg"
+zone_description = "Elevated district overlooking the central area. Known for scenic views and upscale establishments."
+development_notes = "Accessible from center, connects to corner zones for exploration flow." 

@@ -1,0 +1,20 @@
+[gd_resource type="SceneMapData" format=3]
+
+[resource]
+zone_id = "southwest"
+display_name = "Southwest Waterfront"
+scene_path = "res://scenes/levels/outdoor/SouthWest.tscn"
+map_position = Vector2(0, 2)
+biome_theme = "waterfront"
+thumbnail_path = "res://assets/cartography/zone_thumbnails/southwest.png"
+discovery_radius = 32.0
+is_hub_location = false
+connected_zones = Array[String](["south", "west"])
+requires_story_progress = false
+has_indoor_areas = true
+has_doorways = true
+recommended_level = 4
+ambient_music = "res://audio/music/exploration/water_ambient.ogg"
+exploration_music = "res://audio/music/exploration/harbor_theme.ogg"
+zone_description = "Waterfront district with docks, harbors, and maritime activities. Gateway to water-based exploration."
+development_notes = "Unique waterfront biome, potential for water-related gameplay and transportation." 

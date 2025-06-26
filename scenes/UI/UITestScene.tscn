@@ -1,0 +1,115 @@
+[gd_scene load_steps=3 format=3 uid="uid://gm3qg34621p0"]
+
+[ext_resource type="PackedScene" uid="uid://dx72egemyvj34" path="res://scenes/UI/GameUI.tscn" id="1_4x7z9"]
+[ext_resource type="Script" uid="uid://bxygum2vobi6s" path="res://scripts/ui/ui_test_scene.gd" id="2_8v1w3"]
+
+[node name="UITestScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_8v1w3")
+
+[node name="GameUI" parent="." instance=ExtResource("1_4x7z9")]
+layout_mode = 1
+
+[node name="TestControls" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -200.0
+offset_right = 320.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="Title" type="Label" parent="TestControls"]
+layout_mode = 2
+text = "UI System Test Controls"
+
+[node name="ThemeControls" type="VBoxContainer" parent="TestControls"]
+layout_mode = 2
+
+[node name="ThemeLabel" type="Label" parent="TestControls/ThemeControls"]
+layout_mode = 2
+text = "Theme Testing:"
+
+[node name="ThemeButtons" type="HBoxContainer" parent="TestControls/ThemeControls"]
+layout_mode = 2
+
+[node name="DefaultTheme" type="Button" parent="TestControls/ThemeControls/ThemeButtons"]
+layout_mode = 2
+text = "Default"
+
+[node name="HighContrast" type="Button" parent="TestControls/ThemeControls/ThemeButtons"]
+layout_mode = 2
+text = "High Contrast"
+
+[node name="MobileTheme" type="Button" parent="TestControls/ThemeControls/ThemeButtons"]
+layout_mode = 2
+text = "Mobile"
+
+[node name="RetroTheme" type="Button" parent="TestControls/ThemeControls/ThemeButtons"]
+layout_mode = 2
+text = "Retro"
+
+[node name="NotificationControls" type="VBoxContainer" parent="TestControls"]
+layout_mode = 2
+
+[node name="NotificationLabel" type="Label" parent="TestControls/NotificationControls"]
+layout_mode = 2
+text = "Notification Testing:"
+
+[node name="NotificationButtons" type="VBoxContainer" parent="TestControls/NotificationControls"]
+layout_mode = 2
+
+[node name="NotificationRow1" type="HBoxContainer" parent="TestControls/NotificationControls/NotificationButtons"]
+layout_mode = 2
+
+[node name="InfoNotification" type="Button" parent="TestControls/NotificationControls/NotificationButtons/NotificationRow1"]
+layout_mode = 2
+text = "Info"
+
+[node name="SuccessNotification" type="Button" parent="TestControls/NotificationControls/NotificationButtons/NotificationRow1"]
+layout_mode = 2
+text = "Success"
+
+[node name="WarningNotification" type="Button" parent="TestControls/NotificationControls/NotificationButtons/NotificationRow1"]
+layout_mode = 2
+text = "Warning"
+
+[node name="NotificationRow2" type="HBoxContainer" parent="TestControls/NotificationControls/NotificationButtons"]
+layout_mode = 2
+
+[node name="ErrorNotification" type="Button" parent="TestControls/NotificationControls/NotificationButtons/NotificationRow2"]
+layout_mode = 2
+text = "Error"
+
+[node name="DebugNotification" type="Button" parent="TestControls/NotificationControls/NotificationButtons/NotificationRow2"]
+layout_mode = 2
+text = "Debug"
+
+[node name="ClearNotifications" type="Button" parent="TestControls/NotificationControls/NotificationButtons/NotificationRow2"]
+layout_mode = 2
+text = "Clear"
+
+[node name="ModalControls" type="VBoxContainer" parent="TestControls"]
+layout_mode = 2
+
+[node name="ModalLabel" type="Label" parent="TestControls/ModalControls"]
+layout_mode = 2
+text = "Modal Testing:"
+
+[node name="ModalButtons" type="HBoxContainer" parent="TestControls/ModalControls"]
+layout_mode = 2
+
+[node name="ShowModal" type="Button" parent="TestControls/ModalControls/ModalButtons"]
+layout_mode = 2
+text = "Show Modal"
+
+[node name="TestPause" type="Button" parent="TestControls/ModalControls/ModalButtons"]
+layout_mode = 2
+text = "Test Pause"

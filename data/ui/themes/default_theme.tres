@@ -1,0 +1,54 @@
+[gd_resource type="UIThemeConfig" script_class="UIThemeConfig" load_steps=2 format=3]
+
+[ext_resource type="FontFile" uid="uid://b2y4hqhqfv3sp" path="res://fonts/Exo2-VariableFont_wght.ttf" id="1_0j2k4"]
+
+[resource]
+script = preload("res://scripts/ui/ui_theme_config.gd")
+theme_name = "default"
+theme_description = "Modern, clean theme for standard gameplay"
+is_accessibility_theme = false
+primary_color = Color(0.557, 0.808, 0.902, 1)
+secondary_color = Color(0.251, 0.471, 0.549, 1)
+background_color = Color(0.102, 0.102, 0.102, 0.9)
+surface_color = Color(0.15, 0.15, 0.15, 1)
+text_primary = Color(1, 1, 1, 1)
+text_secondary = Color(0.8, 0.8, 0.8, 1)
+text_disabled = Color(0.5, 0.5, 0.5, 1)
+text_inverse = Color(0, 0, 0, 1)
+success_color = Color(0.4, 0.8, 0.4, 1)
+warning_color = Color(1, 0.8, 0.2, 1)
+error_color = Color(0.9, 0.3, 0.3, 1)
+info_color = Color(0.3, 0.7, 0.9, 1)
+button_normal = Color(0.4, 0.6, 0.8, 1)
+button_hover = Color(0.5, 0.7, 0.9, 1)
+button_pressed = Color(0.3, 0.5, 0.7, 1)
+button_disabled = Color(0.3, 0.3, 0.3, 1)
+font_primary = ExtResource("1_0j2k4")
+font_size_small = 12
+font_size_base = 16
+font_size_large = 24
+font_size_title = 32
+font_size_display = 48
+ui_scale = 1.0
+panel_radius = 8
+button_radius = 4
+spacing_tiny = 2
+spacing_small = 4
+spacing_medium = 8
+spacing_large = 16
+spacing_xlarge = 24
+button_height = 40
+input_height = 36
+default_margin = 16
+animation_speed_multiplier = 1.0
+transition_duration_fast = 0.15
+transition_duration_normal = 0.3
+transition_duration_slow = 0.5
+high_contrast_mode = false
+large_text_mode = false
+reduced_motion = false
+focus_outline_width = 2
+focus_outline_color = Color(0, 1, 1, 1)
+mobile_optimized = false
+gamepad_optimized = false
+desktop_optimized = true 

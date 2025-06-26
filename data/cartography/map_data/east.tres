@@ -1,0 +1,20 @@
+[gd_resource type="SceneMapData" format=3]
+
+[resource]
+zone_id = "east"
+display_name = "Eastern District"
+scene_path = "res://scenes/levels/outdoor/East.tscn"
+map_position = Vector2(2, 1)
+biome_theme = "urban"
+thumbnail_path = "res://assets/cartography/zone_thumbnails/east.png"
+discovery_radius = 32.0
+is_hub_location = false
+connected_zones = Array[String](["center", "northeast", "southeast"])
+requires_story_progress = false
+has_indoor_areas = true
+has_doorways = true
+recommended_level = 2
+ambient_music = "res://audio/music/exploration/urban_ambient.ogg"
+exploration_music = "res://audio/music/exploration/east_district.ogg"
+zone_description = "Commercial district with markets and trade centers. Gateway to the eastern outskirts."
+development_notes = "Major transit area connecting center to eastern corner zones." 

@@ -1,0 +1,106 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk5vqy3rlv7o6"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends Control
+
+# Simple theme test scene for Phase 2B validation
+
+@onready var theme_label = $VBoxContainer/ThemeLabel
+@onready var test_button = $VBoxContainer/TestButton
+@onready var theme_cycle_button = $VBoxContainer/ThemeCycleButton
+@onready var info_panel = $VBoxContainer/InfoPanel
+
+func _ready():
+	# Register with UIThemeManager
+	UIThemeManager.register_ui_component(self)
+	
+	# Connect theme change signals
+	UIThemeManager.theme_changed.connect(_on_theme_changed)
+	UIThemeManager.theme_config_changed.connect(_on_theme_config_changed)
+	
+	# Setup initial display
+	update_theme_display()
+	
+	# Connect button
+	theme_cycle_button.pressed.connect(_on_cycle_theme_pressed)
+
+func _on_theme_changed(theme_name: String, theme_resource: Theme):
+	print(\"Theme changed to: \", theme_name)
+	update_theme_display()
+
+func _on_theme_config_changed(theme_config: UIThemeConfig):
+	print(\"Theme config changed: \", theme_config.theme_name)
+	update_theme_display()
+
+func update_theme_display():
+	if theme_label:
+		theme_label.text = \"Current Theme: \" + UIThemeManager.get_current_theme_name()
+	
+	var config = UIThemeManager.get_current_theme_config()
+	if config and info_panel:
+		var info_text = \"Theme: \" + config.theme_name + \"\\n\"
+		info_text += \"Description: \" + config.theme_description + \"\\n\"
+		info_text += \"Accessibility: \" + str(config.is_accessibility_theme) + \"\\n\"
+		info_text += \"Valid: \" + str(config.is_valid())
+		
+		if info_panel.get_child_count() > 0:
+			var info_label = info_panel.get_child(0)
+			if info_label is Label:
+				info_label.text = info_text
+
+func _on_cycle_theme_pressed():
+	UIThemeManager.cycle_themes_for_testing()
+
+func apply_theme_changes(theme_resource: Theme):
+	# Called by UIThemeManager when theme changes
+	print(\"Applying theme changes to test scene\")
+"
+
+[node name="UIThemeTestScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource("GDScript_1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+
+[node name="ThemeLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Current Theme: Loading..."
+horizontal_alignment = 1
+
+[node name="TestButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Test Button"
+
+[node name="ThemeCycleButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Cycle Themes (F7)"
+
+[node name="InfoPanel" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 100)
+
+[node name="InfoLabel" type="Label" parent="VBoxContainer/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+text = "Theme info will appear here..."
+autowrap_mode = 2
+vertical_alignment = 1 

@@ -3891,7 +3891,6 @@ tile_set = SubResource("TileSet_mi6p0")
 [node name="Items" type="TileMapLayer" parent="Interaction"]
 
 [node name="Player" parent="." instance=ExtResource("1_asuaa")]
-visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(540, 360)

@@ -1,0 +1,20 @@
+[gd_resource type="SceneMapData" format=3]
+
+[resource]
+zone_id = "northwest"
+display_name = "Northwest Preserve"
+scene_path = "res://scenes/levels/outdoor/NorthWest.tscn"
+map_position = Vector2(0, 0)
+biome_theme = "nature"
+thumbnail_path = "res://assets/cartography/zone_thumbnails/northwest.png"
+discovery_radius = 32.0
+is_hub_location = false
+connected_zones = Array[String](["north", "west"])
+requires_story_progress = false
+has_indoor_areas = false
+has_doorways = false
+recommended_level = 3
+ambient_music = "res://audio/music/exploration/nature_ambient.ogg"
+exploration_music = "res://audio/music/exploration/preserve_theme.ogg"
+zone_description = "Natural preserve area with parks and green spaces. A respite from urban life."
+development_notes = "Different biome showcasing nature theme, potential for environmental gameplay." 

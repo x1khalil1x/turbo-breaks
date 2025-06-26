@@ -38,13 +38,13 @@ tile_set = ExtResource("4_collision")
 [node name="WestBorder" parent="Interactions/Doorways" instance=ExtResource("5_doorway")]
 position = Vector2(40, 360)
 target_scene = "res://scenes/levels/outdoor/North.tscn"
-target_position = Vector2(1040, 360)
+target_position = Vector2(960, 360)
 doorway_id = "northeast_to_north"
 
 [node name="SouthBorder" parent="Interactions/Doorways" instance=ExtResource("5_doorway")]
 position = Vector2(540, 680)
 target_scene = "res://scenes/levels/outdoor/East.tscn"
-target_position = Vector2(540, 40)
+target_position = Vector2(540, 120)
 doorway_id = "northeast_to_east"
 
 [node name="NPCs" type="Node2D" parent="Interactions"]

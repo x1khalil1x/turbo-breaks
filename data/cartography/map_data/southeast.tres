@@ -1,0 +1,20 @@
+[gd_resource type="SceneMapData" format=3]
+
+[resource]
+zone_id = "southeast"
+display_name = "Southeast Industrial"
+scene_path = "res://scenes/levels/outdoor/SouthEast.tscn"
+map_position = Vector2(2, 2)
+biome_theme = "industrial"
+thumbnail_path = "res://assets/cartography/zone_thumbnails/southeast.png"
+discovery_radius = 32.0
+is_hub_location = false
+connected_zones = Array[String](["south", "east"])
+requires_story_progress = false
+has_indoor_areas = true
+has_doorways = true
+recommended_level = 4
+ambient_music = "res://audio/music/exploration/industrial_ambient.ogg"
+exploration_music = "res://audio/music/exploration/factory_theme.ogg"
+zone_description = "Heavy industrial zone with factories and manufacturing facilities. The economic engine of the city."
+development_notes = "Industrial biome with different atmosphere, potential for machinery-based gameplay." 

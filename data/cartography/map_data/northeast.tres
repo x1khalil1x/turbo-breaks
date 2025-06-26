@@ -1,0 +1,20 @@
+[gd_resource type="SceneMapData" format=3]
+
+[resource]
+zone_id = "northeast"
+display_name = "Northeast Outskirts"
+scene_path = "res://scenes/levels/outdoor/NorthEast.tscn"
+map_position = Vector2(2, 0)
+biome_theme = "suburban"
+thumbnail_path = "res://assets/cartography/zone_thumbnails/northeast.png"
+discovery_radius = 32.0
+is_hub_location = false
+connected_zones = Array[String](["north", "east"])
+requires_story_progress = false
+has_indoor_areas = false
+has_doorways = false
+recommended_level = 3
+ambient_music = "res://audio/music/exploration/suburban_ambient.ogg"
+exploration_music = "res://audio/music/exploration/outskirts_theme.ogg"
+zone_description = "Quiet suburban area on the city's edge. Peaceful residential neighborhoods."
+development_notes = "Corner zone with different biome feel, less dense urban environment." 

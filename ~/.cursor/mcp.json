@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "Notion": {
+      "url": "https://mcp.notion.com/mcp",
+      "env": {
+        "NOTION_AUTH_TYPE": "oauth",
+        "NOTION_FORCE_REAUTH": "true"
+      }
+    }
+  }
+} 

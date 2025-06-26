@@ -61,4 +61,51 @@ func get_current_scene_name() -> String:
 
 func can_move_direction(direction: Vector2) -> bool:
 	var target_pos = current_map_position + direction
-	return target_pos in map_scenes 
+	return target_pos in map_scenes
+
+# SCENE REGISTRATION AND TRACKING
+func register_current_scene(scene_id: String):
+	"""Register a scene when it loads - used for debugging and tracking"""
+	print("MapManager: Registered scene: ", scene_id)
+	
+	# Try to update current_map_position based on scene_id
+	update_position_from_scene_id(scene_id)
+	
+	if DebugManager:
+		DebugManager.log_info("MapManager: Scene '" + scene_id + "' registered at position " + str(current_map_position))
+
+func update_position_from_scene_id(scene_id: String):
+	"""Update current map position based on scene ID"""
+	# Convert scene_id to map position
+	var scene_name = scene_id.to_lower()
+	
+	# Map scene names to positions
+	var scene_positions = {
+		"center": Vector2(1, 1),
+		"north": Vector2(1, 0),
+		"south": Vector2(1, 2),
+		"east": Vector2(2, 1),
+		"west": Vector2(0, 1),
+		"northeast": Vector2(2, 0),
+		"northwest": Vector2(0, 0),
+		"southeast": Vector2(2, 2),
+		"southwest": Vector2(0, 2)
+	}
+	
+	if scene_name in scene_positions:
+		current_map_position = scene_positions[scene_name]
+		print("MapManager: Updated position to ", current_map_position, " for scene ", scene_id)
+	else:
+		print("MapManager: Unknown scene name: ", scene_id, " - keeping current position")
+
+func get_current_position() -> Vector2:
+	"""Get the current map position"""
+	return current_map_position
+
+func set_current_position(position: Vector2):
+	"""Set the current map position"""
+	if position in map_scenes:
+		current_map_position = position
+		print("MapManager: Position set to ", current_map_position)
+	else:
+		print("MapManager: Invalid position ", position, " - ignoring") 

@@ -17,10 +17,16 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+DebugManager="*res://Autoload/DebugManager.gd"
 SceneManager="*res://Autoload/SceneManager.gd"
 MusicPlayer="*res://Autoload/music_player.gd"
 FontManager="*res://Autoload/FontManager.gd"
-DebugManager="*res://Autoload/DebugManager.gd"
+MapManager="*res://Autoload/MapManager.gd"
+UIThemeManager="*res://Autoload/UIThemeManager.gd"
+UIStateManager="*res://Autoload/UIStateManager.gd"
+NotificationManager="*res://Autoload/NotificationManager.gd"
+DrivingConfigManager="*res://Autoload/DrivingConfigManager.gd"
+WorldMapManager="*res://Autoload/WorldMapManager.gd"
 
 [display]
 

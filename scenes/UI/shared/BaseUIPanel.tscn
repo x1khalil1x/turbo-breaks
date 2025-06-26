@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8jhkl5xc7wap"]
+
+[ext_resource type="Script" path="res://scripts/ui/base_ui_panel.gd" id="1_p4k2v"]
+
+[node name="BaseUIPanel" type="PanelContainer"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_p4k2v")
+
+[node name="ContentContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="ContentContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="ContentContainer/Content"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="ContentContainer/Content/Header"]
+layout_mode = 2
+text = "Panel Title"
+
+[node name="CloseButton" type="Button" parent="ContentContainer/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "×"
+
+[node name="Body" type="Control" parent="ContentContainer/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Footer" type="HBoxContainer" parent="ContentContainer/Content"]
+layout_mode = 2 

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="Resource" path="res://data/cartography/map_data/center.tres" id="1"]
+[ext_resource type="Resource" path="res://data/cartography/map_data/north.tres" id="2"]
+[ext_resource type="Resource" path="res://data/cartography/map_data/south.tres" id="3"]
+[ext_resource type="Resource" path="res://data/cartography/map_data/east.tres" id="4"]
+[ext_resource type="Resource" path="res://data/cartography/map_data/west.tres" id="5"]
+[ext_resource type="Resource" path="res://data/cartography/map_data/northeast.tres" id="6"]
+[ext_resource type="Resource" path="res://data/cartography/map_data/northwest.tres" id="7"]
+[ext_resource type="Resource" path="res://data/cartography/map_data/southeast.tres" id="8"]
+[ext_resource type="Resource" path="res://data/cartography/map_data/southwest.tres" id="9"]
+
+[resource]
+script = null 

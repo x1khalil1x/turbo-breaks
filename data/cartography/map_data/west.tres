@@ -1,0 +1,20 @@
+[gd_resource type="SceneMapData" format=3]
+
+[resource]
+zone_id = "west"
+display_name = "Western District"
+scene_path = "res://scenes/levels/outdoor/West.tscn"
+map_position = Vector2(0, 1)
+biome_theme = "urban"
+thumbnail_path = "res://assets/cartography/zone_thumbnails/west.png"
+discovery_radius = 32.0
+is_hub_location = false
+connected_zones = Array[String](["center", "northwest", "southwest"])
+requires_story_progress = false
+has_indoor_areas = true
+has_doorways = true
+recommended_level = 2
+ambient_music = "res://audio/music/exploration/urban_ambient.ogg"
+exploration_music = "res://audio/music/exploration/west_district.ogg"
+zone_description = "Cultural district with entertainment venues and artistic establishments."
+development_notes = "Connects center to western corner zones, potential for unique cultural gameplay." 

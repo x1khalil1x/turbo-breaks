@@ -1,29 +1,48 @@
 extends Node
 
 
-signal scene_changed(scene_name: String)
+# Removed unused signal - scene_changed
 
 var current_scene: Node = null
 var player_spawn_position: Vector2 = Vector2.ZERO
+
+# Global transition cooldown system
+var transition_cooldown: float = 0.0
+const GLOBAL_TRANSITION_COOLDOWN: float = 1.5  # 1.5 seconds global cooldown
 
 func _ready():
 	print("SceneManager: Ready")
 	# Get the current scene
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
-	print("SceneManager: Current scene:", current_scene.name if current_scene else "none")
+	print("SceneManager: Current scene:", str(current_scene.name) if current_scene else "none")
+
+func _process(delta):
+	if transition_cooldown > 0:
+		transition_cooldown -= delta
+
+func can_transition() -> bool:
+	return transition_cooldown <= 0.0
 
 func change_scene_to_file(path: String):
+	if not can_transition():
+		print("SceneManager: Transition blocked by global cooldown (", transition_cooldown, "s remaining)")
+		return
+		
 	print("SceneManager: change_scene_to_file called with path:", path)
 	# Deferred call to avoid issues with the current scene
 	call_deferred("_deferred_change_scene", path)
-
+	transition_cooldown = GLOBAL_TRANSITION_COOLDOWN
 # Generic method for changing to any scene
 func change_scene(path: String):
 	print("SceneManager: change_scene called with path:", path)
 	change_scene_to_file(path)
 
 func change_scene_with_position(path: String, spawn_position: Vector2 = Vector2.ZERO):
+	if not can_transition():
+		print("SceneManager: Transition with position blocked by global cooldown (", transition_cooldown, "s remaining)")
+		return
+		
 	print("SceneManager: change_scene_with_position - ", path, " at ", spawn_position)
 	player_spawn_position = spawn_position
 	change_scene_to_file(path)

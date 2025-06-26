@@ -1,14 +1,163 @@
-[gd_scene format=3 uid="uid://dx72egemyvj34"]
+[gd_scene load_steps=2 format=3 uid="uid://dx72egemyvj34"]
 
-[node name="GameUi" type="Control"]
+[ext_resource type="Script" uid="uid://bug15arhhhgw5" path="res://scripts/ui/game_ui.gd" id="1_8k2v3"]
+
+[node name="GameUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_8k2v3")
 
-[node name="HUD" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="UILayers" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackgroundLayer" type="Control" parent="UILayers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HUDLayer" type="Control" parent="UILayers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HUD" type="Control" parent="UILayers/HUDLayer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopBar" type="HBoxContainer" parent="UILayers/HUDLayer/HUD"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="LeftInfo" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="CenterInfo" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="RightInfo" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="BottomBar" type="HBoxContainer" parent="UILayers/HUDLayer/HUD"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="LeftControls" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="CenterControls" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="RightControls" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="OverlayLayer" type="Control" parent="UILayers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NotificationPanel" type="VBoxContainer" parent="UILayers/OverlayLayer"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_bottom = 300.0
+grow_horizontal = 0
+alignment = 1
+
+[node name="PauseMenu" type="Control" parent="UILayers/OverlayLayer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ModalLayer" type="Control" parent="UILayers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ModalBackground" type="ColorRect" parent="UILayers/ModalLayer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="ModalContainer" type="Control" parent="UILayers/ModalLayer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebugLayer" type="Control" parent="UILayers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DebugOverlay" type="VBoxContainer" parent="UILayers/DebugLayer"]
+visible = false
+layout_mode = 1
+offset_right = 400.0
+offset_bottom = 200.0

@@ -1,0 +1,20 @@
+[gd_resource type="SceneMapData" format=3]
+
+[resource]
+zone_id = "center"
+display_name = "Central District"
+scene_path = "res://scenes/levels/outdoor/Center.tscn"
+map_position = Vector2(1, 1)
+biome_theme = "urban"
+thumbnail_path = "res://assets/cartography/zone_thumbnails/center.png"
+discovery_radius = 64.0
+is_hub_location = true
+connected_zones = Array[String](["north", "south", "east", "west", "northeast", "northwest", "southeast", "southwest"])
+requires_story_progress = false
+has_indoor_areas = true
+has_doorways = true
+recommended_level = 1
+ambient_music = "res://audio/music/exploration/urban_ambient.ogg"
+exploration_music = "res://audio/music/exploration/center_theme.ogg"
+zone_description = "The bustling heart of the city, connecting to all other districts. A natural hub for exploration and commerce."
+development_notes = "Starting zone - player begins here. Should feel welcoming and provide clear navigation to other areas." 
