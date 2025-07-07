@@ -7,7 +7,7 @@ class_name SceneBorderDebug
 
 @export var border_color: Color = Color.MAGENTA
 @export var border_width: float = 2.0
-@export var scene_size: Vector2 = Vector2(1080, 720)
+@export var scene_size: Vector2 = Vector2(1280, 720)
 @export var show_in_game: bool = false
 
 var border_line: Line2D

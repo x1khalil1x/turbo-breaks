@@ -6,7 +6,7 @@ signal volume_changed(new_volume: float)
 var music_catalog: Dictionary = {}
 var current_track: String = ""
 var is_muted: bool = false
-var master_volume: float = 0.7  # Default volume
+var master_volume: float = 0.5  # Default volume
 var gameplay_volume: float = 0.4  # Lower volume during gameplay
 
 enum VolumeMode { MENU, GAMEPLAY }
@@ -97,9 +97,9 @@ func get_target_volume_db() -> float:
 	
 	match current_mode:
 		VolumeMode.MENU:
-			base_volume *= 1.0  # Full volume in menus
+			base_volume *= 0.4  # Full volume in menus
 		VolumeMode.GAMEPLAY:
-			base_volume *= 0.6  # Reduced volume during gameplay
+			base_volume *= 0.3  # Reduced volume during gameplay
 	
 	# Convert linear volume to decibels
 	return linear_to_db(base_volume)

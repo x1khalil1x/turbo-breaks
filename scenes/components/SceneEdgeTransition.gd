@@ -8,8 +8,6 @@ enum EdgeDirection { NORTH, SOUTH, EAST, WEST }
 @export var scene_id: String = ""
 @export var spawn_position: Vector2 = Vector2.ZERO  # Manual spawn position
 
-signal player_entered_edge(target_scene: String, spawn_position: Vector2)
-
 func _ready():
 	body_entered.connect(_on_body_entered)
 	add_to_group("edge_transitions")
@@ -20,7 +18,7 @@ func _on_body_entered(body):
 		print("Player entered edge: ", EdgeDirection.keys()[edge_direction])
 		
 		if DebugManager:
-			DebugManager.log_scene_transition(scene_id, target_scene, spawn_position)
+			DebugManager.log_info("Edge transition: " + scene_id + " -> " + target_scene + " at " + str(spawn_position))
 		
 		SceneManager.change_scene_with_position(target_scene, spawn_position)
 
@@ -39,6 +37,5 @@ func validate_configuration() -> Dictionary:
 	if not FileAccess.file_exists(target_scene):
 		result.valid = false
 		result.issues.append("Target scene file doesn't exist: " + target_scene)
-	
 	
 	return result 

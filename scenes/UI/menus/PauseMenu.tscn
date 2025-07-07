@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjklmctqcb7se"]
+
+[ext_resource type="FontFile" uid="uid://cmc8y102na4qr" path="res://fonts/Orbitron.ttf" id="1_oo21l"]
+[ext_resource type="FontFile" uid="uid://c5pq13t7sfqfl" path="res://fonts/Michroma-Regular.ttf" id="2_pastc"]
+
+[node name="PauseMenu" type="Node2D"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 320.0
+offset_top = 180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pause" type="Label" parent="."]
+offset_right = 640.0
+offset_bottom = 100.0
+theme_override_fonts/font = ExtResource("1_oo21l")
+theme_override_font_sizes/font_size = 60
+text = "PAUSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Pause"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="Main Buttons" type="VBoxContainer" parent="Pause/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="PLAY" type="Button" parent="Pause/CenterContainer/Main Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pastc")
+theme_override_font_sizes/font_size = 30
+text = "PLAY"
+
+[node name="RESTART" type="Button" parent="Pause/CenterContainer/Main Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pastc")
+theme_override_font_sizes/font_size = 30
+text = "RESTART"
+
+[node name="SETTINGS" type="Button" parent="Pause/CenterContainer/Main Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pastc")
+theme_override_font_sizes/font_size = 30
+text = "SETTINGS"
+
+[node name="QUIT" type="Button" parent="Pause/CenterContainer/Main Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_pastc")
+theme_override_font_sizes/font_size = 30
+text = "QUIT"
+
+[node name="Settings Menu" type="VBoxContainer" parent="Pause/CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Pause/CenterContainer"]
+layout_mode = 2

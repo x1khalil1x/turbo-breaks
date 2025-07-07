@@ -1,18 +1,18 @@
 [gd_resource type="TileSet" load_steps=21 format=3 uid="uid://cm8utuv5q08c5"]
 
-[ext_resource type="Texture2D" uid="uid://c7mtx6gmvg73l" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/4_Generic_Buildings_32x32.png" id="1_3cgsn"]
-[ext_resource type="Texture2D" uid="uid://beo5j485lx2s4" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/5_Floor_Modular_Buildings_32x32.png" id="2_0b735"]
-[ext_resource type="Texture2D" uid="uid://f4dclyme5r0s" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/6_Garage_Sales_32x32.png" id="3_alf4s"]
-[ext_resource type="Texture2D" uid="uid://deu7t6jm7vjsk" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/7_Villas_32x32.png" id="4_k3bmr"]
-[ext_resource type="Texture2D" uid="uid://lwsj86vi8csi" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/9_Shopping_Center_and_Markets_32x32.png" id="5_ekrtj"]
-[ext_resource type="Texture2D" uid="uid://tj0h5txwnqwv" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/13_School_32x32.png" id="6_2x7ys"]
-[ext_resource type="Texture2D" uid="uid://dl36gplyjgnrh" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/16_Office_32x32.png" id="7_p3jdq"]
-[ext_resource type="Texture2D" uid="uid://buj30fqlwjr10" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/20_Subway_and_Train_Station_32x32.png" id="8_otsl7"]
-[ext_resource type="Texture2D" uid="uid://dywngkdeell3q" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/22_Post_Office_32x32.png" id="9_bhjth"]
-[ext_resource type="Texture2D" uid="uid://d0sv3rbj4ky5m" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/10_Vehicles_32x32.png" id="10_0b735"]
+[ext_resource type="Texture2D" uid="uid://c7mtx6gmvg73l" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/4_Generic_Buildings_32x32.png" id="1_0b735"]
+[ext_resource type="Texture2D" uid="uid://beo5j485lx2s4" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/5_Floor_Modular_Buildings_32x32.png" id="2_alf4s"]
+[ext_resource type="Texture2D" uid="uid://f4dclyme5r0s" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/6_Garage_Sales_32x32.png" id="3_k3bmr"]
+[ext_resource type="Texture2D" uid="uid://deu7t6jm7vjsk" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/7_Villas_32x32.png" id="4_ekrtj"]
+[ext_resource type="Texture2D" uid="uid://lwsj86vi8csi" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/9_Shopping_Center_and_Markets_32x32.png" id="5_2x7ys"]
+[ext_resource type="Texture2D" uid="uid://tj0h5txwnqwv" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/13_School_32x32.png" id="6_p3jdq"]
+[ext_resource type="Texture2D" uid="uid://dl36gplyjgnrh" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/16_Office_32x32.png" id="7_otsl7"]
+[ext_resource type="Texture2D" uid="uid://buj30fqlwjr10" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/20_Subway_and_Train_Station_32x32.png" id="8_bhjth"]
+[ext_resource type="Texture2D" uid="uid://dywngkdeell3q" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/22_Post_Office_32x32.png" id="9_ga00q"]
+[ext_resource type="Texture2D" uid="uid://d0sv3rbj4ky5m" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/10_Vehicles_32x32.png" id="10_o1a7v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ga00q"]
-texture = ExtResource("1_3cgsn")
+texture = ExtResource("1_0b735")
 texture_region_size = Vector2i(32, 32)
 0:1/0 = 0
 1:1/0 = 0
@@ -3892,7 +3892,7 @@ texture_region_size = Vector2i(32, 32)
 15:198/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o1a7v"]
-texture = ExtResource("2_0b735")
+texture = ExtResource("2_alf4s")
 texture_region_size = Vector2i(32, 32)
 19:0/0 = 0
 20:0/0 = 0
@@ -9144,7 +9144,7 @@ texture_region_size = Vector2i(32, 32)
 18:258/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_erena"]
-texture = ExtResource("3_alf4s")
+texture = ExtResource("3_k3bmr")
 texture_region_size = Vector2i(32, 32)
 0:1/0 = 0
 1:1/0 = 0
@@ -10044,7 +10044,7 @@ texture_region_size = Vector2i(32, 32)
 5:37/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bhfyd"]
-texture = ExtResource("4_k3bmr")
+texture = ExtResource("4_ekrtj")
 texture_region_size = Vector2i(32, 32)
 2:0/0 = 0
 3:0/0 = 0
@@ -11362,7 +11362,7 @@ texture_region_size = Vector2i(32, 32)
 21:56/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_awvc7"]
-texture = ExtResource("5_ekrtj")
+texture = ExtResource("5_2x7ys")
 texture_region_size = Vector2i(32, 32)
 0:2/0 = 0
 1:2/0 = 0
@@ -12954,7 +12954,7 @@ texture_region_size = Vector2i(32, 32)
 28:67/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ascp"]
-texture = ExtResource("6_2x7ys")
+texture = ExtResource("6_p3jdq")
 texture_region_size = Vector2i(32, 32)
 10:1/0 = 0
 11:1/0 = 0
@@ -15492,7 +15492,7 @@ texture_region_size = Vector2i(32, 32)
 31:115/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rfs4n"]
-texture = ExtResource("7_p3jdq")
+texture = ExtResource("7_otsl7")
 texture_region_size = Vector2i(32, 32)
 0:1/0 = 0
 1:1/0 = 0
@@ -17106,7 +17106,7 @@ texture_region_size = Vector2i(32, 32)
 10:93/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v0d2q"]
-texture = ExtResource("8_otsl7")
+texture = ExtResource("8_bhjth")
 texture_region_size = Vector2i(32, 32)
 3:0/0 = 0
 5:0/0 = 0
@@ -21295,7 +21295,7 @@ texture_region_size = Vector2i(32, 32)
 22:184/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sydr7"]
-texture = ExtResource("9_bhjth")
+texture = ExtResource("9_ga00q")
 texture_region_size = Vector2i(32, 32)
 17:0/0 = 0
 18:0/0 = 0
@@ -21971,7 +21971,7 @@ texture_region_size = Vector2i(32, 32)
 31:29/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_alf4s"]
-texture = ExtResource("10_0b735")
+texture = ExtResource("10_o1a7v")
 texture_region_size = Vector2i(32, 32)
 4:0/0 = 0
 5:0/0 = 0

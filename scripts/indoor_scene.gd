@@ -98,9 +98,10 @@ func validate_current_scene():
 	else:
 		DebugManager.log_info("Scene '" + scene_id + "' validation passed")
 
-func _on_doorway_entered(target_scene: String, target_position: Vector2):
+func _on_doorway_entered(target_scene: String, target_position: Vector2, entry_direction: Vector2 = Vector2.ZERO):
 	if DebugManager:
-		DebugManager.log_scene_transition(scene_id, target_scene, target_position)
+		DebugManager.log_info("Scene transition: " + scene_id + " -> " + target_scene + " at " + str(target_position))
 	
 	print("Indoor scene '" + scene_id + "' transitioning to: " + target_scene)
+	print("  Target position: " + str(target_position) + " Entry direction: " + str(entry_direction))
 	SceneManager.change_scene_with_position(target_scene, target_position) 

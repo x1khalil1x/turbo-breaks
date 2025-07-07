@@ -14,8 +14,8 @@ class_name GameUI
 
 # HUD Components
 @onready var hud = $UILayers/HUDLayer/HUD
-@onready var top_bar = $UILayers/HUDLayer/HUD/TopBar
-@onready var bottom_bar = $UILayers/HUDLayer/HUD/BottomBar
+@onready var top_bar = $UILayers/HUDLayer/HUD/VBoxContainer/TopBar
+@onready var bottom_bar = $UILayers/HUDLayer/HUD/VBoxContainer/BottomBar
 @onready var notification_panel = $UILayers/OverlayLayer/NotificationPanel
 @onready var pause_menu = $UILayers/OverlayLayer/PauseMenu
 @onready var modal_background = $UILayers/ModalLayer/ModalBackground
@@ -49,10 +49,14 @@ func _ready():
 	# Setup initial UI state
 	set_ui_mode("exploration")
 	
-	# Register with UIStateManager
-	UIStateManager.register_ui_component(self)
+	# Register with UIStateManager if available
+	if UIStateManager:
+		UIStateManager.register_ui_component(self)
+		print("GameUI: Registered with UIStateManager")
+	else:
+		print("GameUI: UIStateManager not available - continuing without state management")
 	
-	DebugManager.log_info("GameUI: Main UI coordinator ready")
+	print("GameUI: Main UI coordinator ready")
 
 func initialize_ui_system():
 	"""Initialize the UI component system"""
@@ -70,7 +74,10 @@ func initialize_ui_system():
 	# Initialize modal system
 	setup_modal_system()
 	
-	DebugManager.log_info("GameUI: UI system initialized with layered architecture")
+	if DebugManager:
+		DebugManager.log_info("GameUI: UI system initialized with layered architecture")
+	else:
+		print("GameUI: UI system initialized with layered architecture")
 
 func setup_ui_layers():
 	"""Configure UI layer properties for proper rendering order"""
@@ -91,19 +98,20 @@ func setup_ui_layers():
 
 func setup_notification_system():
 	"""Initialize notification display system"""
-	if NotificationManager:
-		NotificationManager.notification_created.connect(_on_notification_created)
-		NotificationManager.notification_dismissed.connect(_on_notification_dismissed)
-		
-		# Configure notification panel
-		notification_panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
-		notification_panel.add_theme_constant_override("separation", 8)
+	# Note: Notification connections are now handled in connect_to_autoloads()
+	# Configure notification panel
+	notification_panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	notification_panel.add_theme_constant_override("separation", 8)
+	print("GameUI: Notification panel configured")
 
 func setup_modal_system():
 	"""Initialize modal dialog system"""
 	if UIStateManager:
 		UIStateManager.modal_opened.connect(_on_modal_opened)
 		UIStateManager.modal_closed.connect(_on_modal_closed)
+		print("GameUI: Modal system connected")
+	else:
+		print("GameUI: UIStateManager not available - modal system disabled")
 		
 	# Configure modal background
 	modal_background.color = Color(0, 0, 0, 0.7)
@@ -135,27 +143,35 @@ func connect_to_autoloads():
 	
 	# Notification system connection
 	if NotificationManager:
-		NotificationManager.notification_added.connect(_on_notification_created)
+		NotificationManager.notification_added.connect(_on_notification_added)
 		NotificationManager.notification_removed.connect(_on_notification_dismissed)
 		print("GameUI: Connected to NotificationManager")
 	else:
 		print("GameUI: NotificationManager not available - notification integration disabled")
 	
 	# Debug system connection
-	if DebugManager and DebugManager.has_signal("debug_mode_toggled"):
-		DebugManager.debug_mode_toggled.connect(_on_debug_mode_toggled)
-		print("GameUI: Connected to DebugManager")
+	if DebugManager:
+		if DebugManager.has_signal("debug_mode_toggled"):
+			DebugManager.debug_mode_toggled.connect(_on_debug_mode_toggled)
+			print("GameUI: Connected to DebugManager debug_mode_toggled signal")
+		else:
+			print("GameUI: DebugManager found but debug_mode_toggled signal not available")
 	else:
-		print("GameUI: DebugManager debug_mode_toggled not available - debug integration disabled")
+		print("GameUI: DebugManager not available - debug integration disabled")
 
 # Theme Management Functions
 func apply_current_theme():
 	"""Apply current theme to all registered UI components"""
 	if not UIThemeManager:
-		DebugManager.log_warning("GameUI: UIThemeManager not available for theme application")
+		print("GameUI: UIThemeManager not available for theme application")
 		return
 	
-	var current_theme = UIThemeManager.get_current_theme()
+	var current_theme = null
+	if UIThemeManager and UIThemeManager.has_method("get_current_theme"):
+		current_theme = UIThemeManager.get_current_theme()
+	elif UIThemeManager:
+		current_theme = UIThemeManager.current_theme
+		
 	if current_theme:
 		# Apply theme to root control
 		theme = current_theme
@@ -165,7 +181,10 @@ func apply_current_theme():
 			if component and is_instance_valid(component):
 				apply_theme_to_component(component, current_theme)
 		
-		DebugManager.log_info("GameUI: Theme applied to " + str(registered_ui_components.size()) + " components")
+		if DebugManager:
+			DebugManager.log_info("GameUI: Theme applied to " + str(registered_ui_components.size()) + " components")
+		else:
+			print("GameUI: Theme applied to " + str(registered_ui_components.size()) + " components")
 
 func apply_theme_to_component(component: Control, ui_theme: Theme):
 	"""Apply theme to a specific UI component"""
@@ -173,14 +192,14 @@ func apply_theme_to_component(component: Control, ui_theme: Theme):
 		component.theme = ui_theme
 		
 		# If component has custom theme application method, call it
-		if component.has_method("apply_theme_changes"):
+		if component.has_method("apply_theme_changes") and UIThemeManager:
 			component.apply_theme_changes(UIThemeManager.current_theme_config)
 
 # UI Component Registration System
 func register_ui_component(component: Control, component_type: String = ""):
 	"""Register UI component for theme updates and management"""
 	if not component:
-		DebugManager.log_warning("GameUI: Attempted to register null component")
+		print("GameUI: Attempted to register null component")
 		return
 	
 	if component in registered_ui_components:
@@ -193,7 +212,10 @@ func register_ui_component(component: Control, component_type: String = ""):
 		apply_theme_to_component(component, UIThemeManager.current_theme)
 	
 	ui_component_registered.emit(component, component_type)
-	DebugManager.log_info("GameUI: Registered UI component - " + component_type)
+	if DebugManager:
+		DebugManager.log_info("GameUI: Registered UI component - " + component_type)
+	else:
+		print("GameUI: Registered UI component - " + component_type)
 
 func unregister_ui_component(component: Control):
 	"""Unregister UI component"""
@@ -213,7 +235,10 @@ func set_ui_mode(new_mode: String):
 	update_ui_for_mode(new_mode)
 	
 	ui_mode_changed.emit(old_mode, new_mode)
-	DebugManager.log_info("GameUI: UI mode changed from " + old_mode + " to " + new_mode)
+	if DebugManager:
+		DebugManager.log_info("GameUI: UI mode changed from " + old_mode + " to " + new_mode)
+	else:
+		print("GameUI: UI mode changed from " + old_mode + " to " + new_mode)
 
 func update_ui_for_mode(mode: String):
 	"""Update UI layout and visibility based on current mode"""
@@ -229,7 +254,10 @@ func update_ui_for_mode(mode: String):
 		"menu":
 			show_menu_ui()
 		_:
-			DebugManager.log_warning("GameUI: Unknown UI mode - " + mode)
+			if DebugManager:
+				DebugManager.log_warning("GameUI: Unknown UI mode - " + mode)
+			else:
+				print("GameUI: Unknown UI mode - " + mode)
 
 func show_exploration_ui():
 	"""Configure UI for exploration mode"""
@@ -257,16 +285,16 @@ func show_menu_ui():
 	# Show menu interface only
 
 # Modal Management Functions
-func show_modal(modal_scene: PackedScene, modal_id: String, modal_data: Dictionary = {}) -> Control:
+func show_modal(modal_scene: PackedScene, modal_id: String, _modal_data: Dictionary = {}) -> Control:
 	"""Display modal dialog with proper input blocking"""
 	if not modal_scene:
-		DebugManager.log_error("GameUI: Cannot show modal - scene is null")
+		print("GameUI: ERROR - Cannot show modal - scene is null")
 		return null
 	
 	# Instantiate modal
 	var modal_instance = modal_scene.instantiate()
 	if not modal_instance:
-		DebugManager.log_error("GameUI: Failed to instantiate modal scene")
+		print("GameUI: ERROR - Failed to instantiate modal scene")
 		return null
 	
 	# Configure modal
@@ -275,7 +303,8 @@ func show_modal(modal_scene: PackedScene, modal_id: String, modal_data: Dictiona
 	modal_layer.mouse_filter = Control.MOUSE_FILTER_STOP
 	
 	# Register with state manager
-	UIStateManager.open_modal(modal_id, modal_instance, true)
+	if UIStateManager:
+		UIStateManager.open_modal(modal_id, modal_instance, true)
 	
 	active_modals.append(modal_instance)
 	modal_opened.emit(modal_instance, modal_id)
@@ -284,7 +313,8 @@ func show_modal(modal_scene: PackedScene, modal_id: String, modal_data: Dictiona
 
 func close_modal(modal_id: String, result: Dictionary = {}):
 	"""Close specific modal dialog"""
-	UIStateManager.close_modal(modal_id, result)
+	if UIStateManager:
+		UIStateManager.close_modal_dialog(modal_id, result)
 
 func close_all_modals():
 	"""Close all open modals"""
@@ -314,10 +344,16 @@ func _on_theme_config_changed(_theme_config):
 
 func _on_accessibility_changed(_settings: Dictionary):
 	"""Handle accessibility setting changes"""
-	DebugManager.log_info("GameUI: Accessibility settings updated")
+	if DebugManager:
+		DebugManager.log_info("GameUI: Accessibility settings updated")
+	else:
+		print("GameUI: Accessibility settings updated")
 
 func _on_ui_state_changed(new_state, _old_state):
 	"""Handle UI state changes from UIStateManager"""
+	if not UIStateManager:
+		return
+		
 	match new_state:
 		UIStateManager.UIState.PAUSE:
 			pause_menu.visible = true
@@ -329,6 +365,9 @@ func _on_ui_state_changed(new_state, _old_state):
 
 func _on_game_mode_changed(new_mode, _old_mode):
 	"""Handle game mode changes from UIStateManager"""
+	if not UIStateManager:
+		return
+		
 	var mode_name = UIStateManager.GameMode.keys()[new_mode].to_lower()
 	set_ui_mode(mode_name)
 
@@ -354,18 +393,137 @@ func _on_modal_closed(modal_id: String, _result: Dictionary):
 	
 	modal_closed.emit(null, modal_id)  # modal reference handled by UIStateManager
 
-func _on_notification_created(_notification_data):
+func _on_notification_added(_notification_data):
 	"""Handle new notification creation"""
 	# Create notification UI element
 	create_notification_ui(_notification_data)
 
-func _on_notification_dismissed(_notification_id: String):
-	"""Handle notification dismissal"""
-	remove_notification_ui(_notification_id)
-
 func _on_debug_mode_toggled(enabled: bool):
 	"""Handle debug mode toggle"""
 	debug_overlay.visible = enabled
+	
+	if enabled:
+		# Add debug information to the overlay
+		update_debug_overlay_content()
+		DebugManager.log_info("GameUI: Visual debug overlay ENABLED")
+	else:
+		DebugManager.log_info("GameUI: Visual debug overlay DISABLED")
+
+func update_debug_overlay_content():
+	"""Update debug overlay with current information"""
+	# Clear existing debug content
+	for child in debug_overlay.get_children():
+		child.queue_free()
+	
+	# Create debug information panel
+	var debug_panel = create_debug_info_panel()
+	debug_overlay.add_child(debug_panel)
+	
+	# Create performance monitor
+	var perf_panel = create_performance_panel()
+	debug_overlay.add_child(perf_panel)
+
+func create_debug_info_panel() -> Panel:
+	"""Create the main debug information panel"""
+	var panel = Panel.new()
+	panel.size = Vector2(300, 200)
+	panel.position = Vector2(10, 10)
+	
+	var vbox = VBoxContainer.new()
+	vbox.position = Vector2(10, 10)
+	vbox.size = Vector2(280, 180)
+	panel.add_child(vbox)
+	
+	# Title
+	var title = Label.new()
+	title.text = "🔧 DEBUG OVERLAY"
+	title.add_theme_stylebox_override("normal", StyleBoxFlat.new())
+	vbox.add_child(title)
+	
+	# Scene info
+	var scene_info = Label.new()
+	var current_scene = get_tree().current_scene
+	scene_info.text = "📍 Scene: " + (current_scene.name if current_scene else "Unknown")
+	vbox.add_child(scene_info)
+	
+	# Player info
+	var player_info = Label.new()
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		player_info.text = "🎮 Player: " + str(players[0].global_position)
+	else:
+		player_info.text = "🎮 Player: Not found"
+	vbox.add_child(player_info)
+	
+	# UI info
+	var ui_info = Label.new()
+	ui_info.text = "🖥️ UI Mode: " + current_ui_mode
+	vbox.add_child(ui_info)
+	
+	# Autoload status
+	var autoload_info = Label.new()
+	var healthy_autoloads = 0
+	var total_autoloads = 11  # Based on your project.godot
+	
+	if DebugManager: healthy_autoloads += 1
+	if SceneManager: healthy_autoloads += 1
+	if IndustrialSceneManager: healthy_autoloads += 1
+	if UIThemeManager: healthy_autoloads += 1
+	if UIStateManager: healthy_autoloads += 1
+	if NotificationManager: healthy_autoloads += 1
+	
+	autoload_info.text = "⚙️ Autoloads: " + str(healthy_autoloads) + "/" + str(total_autoloads) + " healthy"
+	vbox.add_child(autoload_info)
+	
+	# Key commands reminder
+	var separator = HSeparator.new()
+	vbox.add_child(separator)
+	
+	var commands = Label.new()
+	commands.text = "F4=Validate F6=Systems F8=SceneMgr"
+	commands.add_theme_font_size_override("font_size", 10)
+	vbox.add_child(commands)
+	
+	return panel
+
+func create_performance_panel() -> Panel:
+	"""Create performance monitoring panel"""
+	var panel = Panel.new()
+	panel.size = Vector2(250, 150)
+	panel.position = Vector2(320, 10)
+	
+	var vbox = VBoxContainer.new()
+	vbox.position = Vector2(10, 10)
+	vbox.size = Vector2(230, 130)
+	panel.add_child(vbox)
+	
+	# Performance title
+	var title = Label.new()
+	title.text = "📊 PERFORMANCE"
+	vbox.add_child(title)
+	
+	# FPS
+	var fps_label = Label.new()
+	fps_label.text = "FPS: " + str(Engine.get_frames_per_second())
+	vbox.add_child(fps_label)
+	
+	# Memory usage
+	var memory_label = Label.new()
+	memory_label.text = "Memory: " + str(OS.get_static_memory_usage()) + " bytes"
+	vbox.add_child(memory_label)
+	
+	# UI Pool status (if available)
+	if IndustrialSceneManager:
+		var pool_status = IndustrialSceneManager.get_ui_pool_status()
+		var total_pooled = 0
+		for scene_type in pool_status:
+			total_pooled += pool_status[scene_type]
+		
+		var pool_label = Label.new()
+		pool_label.text = "UI Pool: " + str(total_pooled) + " instances"
+		vbox.add_child(pool_label)
+	
+	return panel
 
 # Notification UI Functions
 func create_notification_ui(_notification_data: Dictionary):
@@ -385,17 +543,17 @@ func validate_ui_system() -> bool:
 	
 	# Check layer structure
 	if not hud_layer or not overlay_layer or not modal_layer:
-		DebugManager.log_error("GameUI: Missing critical UI layers")
+		print("GameUI: ERROR - Missing critical UI layers")
 		validation_passed = false
 	
 	# Check autoload connections
 	if not UIThemeManager or not UIStateManager:
-		DebugManager.log_error("GameUI: Missing autoload connections")
+		print("GameUI: ERROR - Missing autoload connections")
 		validation_passed = false
 	
 	# Check theme application
 	if not theme:
-		DebugManager.log_warning("GameUI: No theme applied")
+		print("GameUI: WARNING - No theme applied")
 	
 	return validation_passed
 

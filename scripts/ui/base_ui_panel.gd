@@ -203,6 +203,9 @@ func apply_theme_changes(theme_config: UIThemeConfig):
 	
 	# Apply accessibility features
 	apply_theme_accessibility(theme_config)
+	
+	# Setup modern hover effects
+	setup_hover_effects()
 
 func apply_theme_colors(theme_config: UIThemeConfig):
 	"""Apply color scheme from theme"""
@@ -274,6 +277,48 @@ func show_panel_animated():
 	# Slide animation
 	if slide_direction != "none":
 		apply_slide_animation()
+
+# Modern hover effects
+func setup_hover_effects():
+	"""Setup modern hover effects based on theme config"""
+	if not current_theme_config or not current_theme_config.hover_enabled:
+		return
+	
+	# Connect mouse events for hover
+	mouse_entered.connect(_on_hover_start)
+	mouse_exited.connect(_on_hover_end)
+
+func _on_hover_start():
+	"""Handle hover start with lift and scale effects"""
+	if not current_theme_config or not current_theme_config.hover_enabled:
+		return
+	
+	var tween = create_tween()
+	tween.set_parallel(true)
+	
+	# Lift effect
+	if current_theme_config.hover_lift_amount > 0:
+		var target_pos = original_position - Vector2(0, current_theme_config.hover_lift_amount)
+		tween.tween_property(self, "position", target_pos, current_theme_config.hover_duration)
+	
+	# Scale effect
+	if current_theme_config.hover_scale_factor > 1.0:
+		var target_scale = Vector2.ONE * current_theme_config.hover_scale_factor
+		tween.tween_property(self, "scale", target_scale, current_theme_config.hover_duration)
+
+func _on_hover_end():
+	"""Handle hover end - return to normal state"""
+	if not current_theme_config or not current_theme_config.hover_enabled:
+		return
+	
+	var tween = create_tween()
+	tween.set_parallel(true)
+	
+	# Return to original position
+	tween.tween_property(self, "position", original_position, current_theme_config.hover_duration)
+	
+	# Return to original scale
+	tween.tween_property(self, "scale", Vector2.ONE, current_theme_config.hover_duration)
 
 func apply_slide_animation():
 	"""Apply slide-in animation based on direction"""

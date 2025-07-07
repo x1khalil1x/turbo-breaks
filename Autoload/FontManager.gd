@@ -33,7 +33,16 @@ func load_fonts():
 	# Monospace/tech fonts
 	fonts[FontType.MONOSPACE] = load("res://fonts/Orbitron.ttf")
 	
-	print("Fonts loaded successfully!")
+	# VALIDATE font loading and report any failures
+	var failed_fonts = []
+	for font_type in fonts:
+		if fonts[font_type] == null:
+			failed_fonts.append(FontType.keys()[font_type])
+	
+	if failed_fonts.size() > 0:
+		print("FontManager: FAILED to load fonts: " + str(failed_fonts))
+	else:
+		print("FontManager: All fonts loaded successfully!")
 
 # Get a font by type
 func get_font(font_type: FontType) -> Font:
@@ -49,6 +58,10 @@ func apply_font_to_label(label: Label, font_type: FontType, size: int = 16):
 	if font and label:
 		label.add_theme_font_override("font", font)
 		label.add_theme_font_size_override("font_size", size)
+	elif not font:
+		print("FontManager: ERROR - Font type " + FontType.keys()[font_type] + " is null!")
+	elif not label:
+		print("FontManager: ERROR - Label is null!")
 
 # Apply font to any control that supports fonts
 func apply_font_to_control(control: Control, font_type: FontType, size: int = 16):

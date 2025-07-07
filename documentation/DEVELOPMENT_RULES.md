@@ -579,9 +579,9 @@ When scaling beyond small grid systems (7-20 scenes), consider these approaches:
 # World bounds: StaticBody2D walls at scene edges
 # Both needed: Camera stops + Player stops
 
-# 1080x720 scene limits:
+# 1280x720 scene limits:
 camera.limit_left = 0
-camera.limit_right = 1080
+camera.limit_right = 1280
 camera.limit_top = 0  
 camera.limit_bottom = 720
 ```

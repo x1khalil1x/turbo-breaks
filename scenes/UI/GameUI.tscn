@@ -38,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HUD" type="Control" parent="UILayers/HUDLayer"]
+[node name="HUD" type="MarginContainer" parent="UILayers/HUDLayer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,48 +47,43 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TopBar" type="HBoxContainer" parent="UILayers/HUDLayer/HUD"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 60.0
-grow_horizontal = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayers/HUDLayer/HUD"]
+layout_mode = 2
+
+[node name="TopBar" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/VBoxContainer"]
+layout_mode = 2
 alignment = 1
 
-[node name="LeftInfo" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/TopBar"]
+[node name="LeftInfo" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/VBoxContainer/TopBar"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="CenterInfo" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/TopBar"]
+[node name="CenterInfo" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/VBoxContainer/TopBar"]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="RightInfo" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/TopBar"]
+[node name="RightInfo" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/VBoxContainer/TopBar"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="BottomBar" type="HBoxContainer" parent="UILayers/HUDLayer/HUD"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -60.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="BottomBar" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/VBoxContainer"]
+layout_mode = 2
 alignment = 1
 
-[node name="LeftControls" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/BottomBar"]
+[node name="LeftControls" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/VBoxContainer/BottomBar"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="CenterControls" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/BottomBar"]
+[node name="CenterControls" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/VBoxContainer/BottomBar"]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="RightControls" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/BottomBar"]
+[node name="RightControls" type="HBoxContainer" parent="UILayers/HUDLayer/HUD/VBoxContainer/BottomBar"]
 layout_mode = 2
 size_flags_horizontal = 8
+
+[node name="Container" type="Container" parent="UILayers/HUDLayer/HUD/VBoxContainer"]
+layout_mode = 2
 
 [node name="OverlayLayer" type="Control" parent="UILayers"]
 layout_mode = 1

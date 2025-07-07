@@ -1,9 +1,10 @@
-[gd_resource type="UIThemeConfig" script_class="UIThemeConfig" load_steps=2 format=3]
+[gd_resource type="UIThemeConfig" script_class="UIThemeConfig" load_steps=3 format=3 uid="uid://mobile_theme_config"]
 
-[ext_resource type="FontFile" uid="uid://b2y4hqhqfv3sp" path="res://fonts/Exo2-VariableFont_wght.ttf" id="1_0j2k4"]
+[ext_resource type="Script" uid="uid://cv8jbtjml0mvg" path="res://scripts/ui/ui_theme_config.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://s7h5kn5bi1xl" path="res://fonts/Exo2-VariableFont_wght.ttf" id="2_font"]
 
 [resource]
-script = preload("res://scripts/ui/ui_theme_config.gd")
+script = ExtResource("1_script")
 theme_name = "mobile"
 theme_description = "Touch-optimized theme for mobile devices"
 is_accessibility_theme = false
@@ -23,7 +24,7 @@ button_normal = Color(0.3, 0.7, 0.9, 1)
 button_hover = Color(0.4, 0.8, 1, 1)
 button_pressed = Color(0.2, 0.6, 0.8, 1)
 button_disabled = Color(0.3, 0.3, 0.3, 1)
-font_primary = ExtResource("1_0j2k4")
+font_primary = ExtResource("2_font")
 font_size_small = 14
 font_size_base = 18
 font_size_large = 26

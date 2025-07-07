@@ -1,0 +1,156 @@
+[gd_scene load_steps=2 format=3 uid="uid://test_theme_validation"]
+
+[sub_resource type="GDScript" id="GDScript_test"]
+script/source = "extends Control
+
+## Theme System Validation Test
+## Run this scene to check if the fixes work
+
+@onready var status_label = $VBox/StatusLabel
+@onready var theme_button = $VBox/ThemeButton
+@onready var test_button = $VBox/TestButton
+
+var test_results = []
+
+func _ready():
+	print(\"🧪 Theme System Validation Test Starting...\")
+	status_label.text = \"Testing theme system...\"
+	
+	# Wait a frame for autoloads
+	await get_tree().process_frame
+	run_validation_tests()
+
+func run_validation_tests():
+	test_results.clear()
+	
+	# Test 1: UIThemeManager exists
+	if UIThemeManager:
+		test_results.append(\"✅ UIThemeManager: Available\")
+		
+		# Test 2: Check critical signals exist
+		if UIThemeManager.has_signal(\"theme_changed\"):
+			test_results.append(\"✅ theme_changed signal: Found\")
+		else:
+			test_results.append(\"❌ theme_changed signal: Missing\")
+		
+		if UIThemeManager.has_signal(\"theme_config_changed\"):
+			test_results.append(\"✅ theme_config_changed signal: Found (FIXED!)\")
+		else:
+			test_results.append(\"❌ theme_config_changed signal: Missing (BROKEN!)\")
+		
+		# Test 3: Check theme loading
+		var current_theme = UIThemeManager.get_current_theme()
+		if current_theme:
+			test_results.append(\"✅ Current theme: Loaded (\" + UIThemeManager.get_current_theme_name() + \")\")
+		else:
+			test_results.append(\"❌ Current theme: Not loaded\")
+		
+		# Test 4: Check .tres file loading
+		var theme_config = UIThemeManager.get_current_theme_config()
+		if theme_config:
+			test_results.append(\"✅ Theme config: Loaded from .tres file!\")
+			test_results.append(\"   → Theme name: \" + theme_config.theme_name)
+			test_results.append(\"   → Valid: \" + str(theme_config.is_valid()))
+		else:
+			test_results.append(\"⚠️ Theme config: Using fallback (no .tres loaded)\")
+		
+		# Test 5: Safe registration test
+		test_results.append(\"🔄 Testing component registration...\")
+		UIThemeManager.register_ui_component(self)
+		test_results.append(\"✅ Registration completed without hanging!\")
+		
+		# Test 6: Theme switching test
+		var available_themes = UIThemeManager.get_available_themes()
+		test_results.append(\"📋 Available themes: \" + str(available_themes))
+		
+		# Setup theme cycle button
+		theme_button.text = \"Cycle Themes (Current: \" + UIThemeManager.get_current_theme_name() + \")\"
+		theme_button.pressed.connect(_on_theme_button_pressed)
+		test_button.pressed.connect(_on_test_button_pressed)
+		
+	else:
+		test_results.append(\"❌ UIThemeManager: Not available!\")
+	
+	# Display results
+	var result_text = \"\\n\".join(test_results)
+	status_label.text = result_text
+	
+	print(\"\\n=== VALIDATION RESULTS ===\")
+	for result in test_results:
+		print(result)
+	print(\"=== END VALIDATION ===\")
+
+func _on_theme_button_pressed():
+	print(\"🔄 Testing theme switching...\")
+	UIThemeManager.cycle_themes_for_testing()
+	
+	# Update button text
+	theme_button.text = \"Cycle Themes (Current: \" + UIThemeManager.get_current_theme_name() + \")\"
+	
+	# Test button responsiveness
+	test_button.text = \"Button Responsive! ✅\"
+	await get_tree().create_timer(1.0).timeout
+	test_button.text = \"Test Button Click\"
+
+func _on_test_button_pressed():
+	print(\"✅ Test button clicked - UI is responsive!\")
+	test_button.text = \"Clicked! ✅\"
+	await get_tree().create_timer(0.5).timeout
+	test_button.text = \"Test Button Click\"
+
+func apply_theme_changes(theme_config):
+	print(\"🎨 Theme change applied to test scene\")
+"
+
+[node name="ThemeValidationTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource("GDScript_test")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+
+[node name="TitleLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "🧪 THEME SYSTEM VALIDATION TEST"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Initializing..."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="ThemeButton" type="Button" parent="VBox"]
+layout_mode = 2
+text = "Cycle Themes"
+
+[node name="TestButton" type="Button" parent="VBox"]
+layout_mode = 2
+text = "Test Button Click"
+
+[node name="HSeparator2" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="InstructionsLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "1. Check console output for detailed results
+2. Click 'Cycle Themes' to test theme switching
+3. Click 'Test Button' to verify UI responsiveness
+4. Look for ✅ in results above"
+horizontal_alignment = 1
+autowrap_mode = 3 

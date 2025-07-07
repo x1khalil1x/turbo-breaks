@@ -2,8 +2,9 @@ extends Resource
 class_name UIThemeConfig
 
 ## UIThemeConfig - Theme Resource Definition
-## Based on UI_RULES.md - Foundation First UI System
+## Based on UI_RULES.md - Foundation First UI System  
 ## Comprehensive theme configuration for runtime theme switching
+## Fixed: Removed @tool directive that was preventing ClassDB registration
 
 # Theme identification
 @export var theme_name: String = ""
@@ -75,6 +76,25 @@ class_name UIThemeConfig
 @export var transition_duration_fast: float = 0.15                 # Quick transitions
 @export var transition_duration_normal: float = 0.3                # Standard transitions
 @export var transition_duration_slow: float = 0.5                  # Slow transitions
+
+# Modern UI Effects
+@export_group("Modern Effects")
+@export var glow_enabled: bool = false                             # Enable glow effects
+@export var glow_color: Color = Color(0.0, 0.8, 1.0)              # Glow color
+@export var glow_size: float = 4.0                                 # Glow radius
+@export var glow_intensity: float = 1.5                            # Glow brightness
+
+# Enhanced hover animations
+@export var hover_enabled: bool = true                             # Enable hover effects
+@export var hover_lift_amount: float = 2.0                         # Hover lift in pixels
+@export var hover_scale_factor: float = 1.02                       # Hover scale multiplier
+@export var hover_glow_boost: float = 1.3                          # Hover glow intensity boost
+@export var hover_duration: float = 0.15                           # Hover animation duration
+
+# Dynamic background effects
+@export var background_effects_enabled: bool = false               # Enable animated backgrounds
+@export var background_scroll_speed: float = 0.5                   # Background animation speed
+@export var background_grid_opacity: float = 0.3                   # Grid overlay opacity
 
 # Accessibility features - Following UI_RULES.md accessibility requirements
 @export_group("Accessibility")

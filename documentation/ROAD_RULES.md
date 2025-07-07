@@ -338,7 +338,7 @@ class_name TrackSegment
 @export var segment_id: String = ""
 @export var segment_type: String = "straight"  # straight, curve_left, curve_right
 @export var biome: String = "highway"          # highway, forest, desert, city
-@export var segment_length: float = 1080.0     # Standard segment height
+@export var segment_length: float = 1280.0     # Standard segment height
 
 # TERRAIN DEFINITION:
 @export var terrain_map: Dictionary = {
@@ -378,7 +378,7 @@ func load_next_segment():
         unload_oldest_segment()
     
     var next_segment = segment_pool[randi() % segment_pool.size()].instantiate()
-    next_segment.position.y = current_position - 1080
+    next_segment.position.y = current_position - 1280
     active_segments.append(next_segment)
     add_child(next_segment)
 ```

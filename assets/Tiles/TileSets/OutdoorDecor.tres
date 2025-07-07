@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" load_steps=11 format=3 uid="uid://c3qxfqxylxrci"]
 
-[ext_resource type="Texture2D" uid="uid://ci0qs70mcf13i" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/3_City_Props_32x32.png" id="1_p6ibb"]
-[ext_resource type="Texture2D" uid="uid://f4dclyme5r0s" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/6_Garage_Sales_32x32.png" id="2_jun4e"]
-[ext_resource type="Texture2D" uid="uid://dwsbj57o1smes" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/8_Worksite_32x32.png" id="3_ikyoo"]
-[ext_resource type="Texture2D" uid="uid://d0sv3rbj4ky5m" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/10_Vehicles_32x32.png" id="4_ys4tq"]
-[ext_resource type="Texture2D" uid="uid://clp4v20hpvrm4" path="res://assets/Exteriors_32x32/ME_Theme_Sorter_32x32/17_Garden_32x32.png" id="5_3l4yl"]
+[ext_resource type="Texture2D" uid="uid://ci0qs70mcf13i" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/3_City_Props_32x32.png" id="1_p6ibb"]
+[ext_resource type="Texture2D" uid="uid://f4dclyme5r0s" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/6_Garage_Sales_32x32.png" id="2_jun4e"]
+[ext_resource type="Texture2D" uid="uid://dwsbj57o1smes" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/8_Worksite_32x32.png" id="3_ikyoo"]
+[ext_resource type="Texture2D" uid="uid://d0sv3rbj4ky5m" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/10_Vehicles_32x32.png" id="4_ys4tq"]
+[ext_resource type="Texture2D" uid="uid://clp4v20hpvrm4" path="res://assets/32x32/Exteriors_32x32/ME_Theme_Sorter_32x32/17_Garden_32x32.png" id="5_3l4yl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g68da"]
 texture = ExtResource("1_p6ibb")

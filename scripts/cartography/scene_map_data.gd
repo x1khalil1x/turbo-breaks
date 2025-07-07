@@ -1,3 +1,4 @@
+@tool
 class_name SceneMapData extends Resource
 
 ## SceneMapData - Zone Metadata Resource

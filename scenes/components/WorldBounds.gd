@@ -1,7 +1,7 @@
 extends Node2D
 class_name WorldBounds
 
-@export var world_size: Vector2 = Vector2(1080, 720)
+@export var world_size: Vector2 = Vector2(1280, 720)
 var boundary_thickness: float = 32.0
 
 func _ready():

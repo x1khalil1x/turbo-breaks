@@ -1,0 +1,228 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpq8jnm75htol"]
+
+[ext_resource type="Script" uid="uid://c0s1rk3t3th6b" path="res://scripts/tools/world_draft_controller.gd" id="1_x3n4m"]
+[ext_resource type="TileSet" uid="uid://c3qxfqxylxrci" path="res://assets/Tiles/TileSets/OutdoorDecor.tres" id="2_b8k4p"]
+
+[node name="WorldDraft" type="Node2D"]
+script = ExtResource("1_x3n4m")
+
+[node name="DraftCanvas" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="GridBackground" type="ColorRect" parent="DraftCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.15, 0.15, 0.2, 1)
+
+[node name="GridLines" type="Control" parent="DraftCanvas"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RegionOverlays" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="RegionMarkers" type="Control" parent="RegionOverlays"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NorthWest" type="Label" parent="RegionOverlays/RegionMarkers"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+text = "NORTHWEST
+(Mountain/Forest)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="North" type="Label" parent="RegionOverlays/RegionMarkers"]
+layout_mode = 0
+offset_left = 1280.0
+offset_right = 2560.0
+offset_bottom = 720.0
+text = "NORTH
+(Tundra/Ice)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NorthEast" type="Label" parent="RegionOverlays/RegionMarkers"]
+layout_mode = 0
+offset_left = 2560.0
+offset_right = 3840.0
+offset_bottom = 720.0
+text = "NORTHEAST
+(Volcanic/Desert)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="West" type="Label" parent="RegionOverlays/RegionMarkers"]
+layout_mode = 0
+offset_top = 720.0
+offset_right = 1280.0
+offset_bottom = 1440.0
+text = "WEST
+(Coastal/Beach)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Center" type="Label" parent="RegionOverlays/RegionMarkers"]
+layout_mode = 0
+offset_left = 1280.0
+offset_top = 720.0
+offset_right = 2560.0
+offset_bottom = 1440.0
+text = "CENTER
+(Hub/City)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="East" type="Label" parent="RegionOverlays/RegionMarkers"]
+layout_mode = 0
+offset_left = 2560.0
+offset_top = 720.0
+offset_right = 3840.0
+offset_bottom = 1440.0
+text = "EAST
+(Plains/Grassland)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SouthWest" type="Label" parent="RegionOverlays/RegionMarkers"]
+layout_mode = 0
+offset_top = 1440.0
+offset_right = 1280.0
+offset_bottom = 2160.0
+text = "SOUTHWEST
+(Swamp/Wetland)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="South" type="Label" parent="RegionOverlays/RegionMarkers"]
+layout_mode = 0
+offset_left = 1280.0
+offset_top = 1440.0
+offset_right = 2560.0
+offset_bottom = 2160.0
+text = "SOUTH
+(Industrial/Urban)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SouthEast" type="Label" parent="RegionOverlays/RegionMarkers"]
+layout_mode = 0
+offset_left = 2560.0
+offset_top = 1440.0
+offset_right = 3840.0
+offset_bottom = 2160.0
+text = "SOUTHEAST
+(Badlands/Ruins)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TileMapStack" type="Node2D" parent="."]
+
+[node name="BaseLayer" type="TileMap" parent="TileMapStack"]
+tile_set = ExtResource("2_b8k4p")
+format = 2
+layer_0/name = "Base"
+layer_0/z_index = -1
+
+[node name="DecorationLayer" type="TileMap" parent="TileMapStack"]
+tile_set = ExtResource("2_b8k4p")
+format = 2
+layer_0/name = "Decoration"
+
+[node name="CollisionLayer" type="TileMap" parent="TileMapStack"]
+visible = false
+tile_set = ExtResource("2_b8k4p")
+format = 2
+layer_0/name = "Collision"
+layer_0/modulate = Color(1, 1, 1, 0.3)
+layer_0/z_index = 1
+
+[node name="ExternalArtLayer" type="Node2D" parent="."]
+
+[node name="ProcreateDraftSlot" type="Sprite2D" parent="ExternalArtLayer"]
+modulate = Color(1, 1, 1, 0.5)
+position = Vector2(1920, 1080)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1920, 1080)
+zoom = Vector2(0.3, 0.3)
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="ToolsPanel" type="Panel" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 300.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ToolsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI/ToolsPanel/VBoxContainer"]
+layout_mode = 2
+text = "World Draft Tools"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/ToolsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ShowGrid" type="CheckBox" parent="UI/ToolsPanel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Show Grid"
+
+[node name="ShowRegions" type="CheckBox" parent="UI/ToolsPanel/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Show Regions"
+
+[node name="ShowCollision" type="CheckBox" parent="UI/ToolsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Show Collision"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/ToolsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ZoomControls" type="HBoxContainer" parent="UI/ToolsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ZoomOut" type="Button" parent="UI/ToolsPanel/VBoxContainer/ZoomControls"]
+layout_mode = 2
+text = "Zoom -"
+
+[node name="ZoomIn" type="Button" parent="UI/ToolsPanel/VBoxContainer/ZoomControls"]
+layout_mode = 2
+text = "Zoom +"
+
+[node name="HSeparator3" type="HSeparator" parent="UI/ToolsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="CenterView" type="Button" parent="UI/ToolsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Center View"
+
+[node name="ResetZoom" type="Button" parent="UI/ToolsPanel/VBoxContainer"]
+layout_mode = 2
+text = "Reset Zoom"

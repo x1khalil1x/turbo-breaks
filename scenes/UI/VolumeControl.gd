@@ -14,11 +14,16 @@ func _ready():
 	visible = true
 	modulate = Color.WHITE
 	
-	# Set initial size
+	# Set initial size for collapsed state (button only)
 	container.custom_minimum_size = Vector2(50, 50)
 	
 	# Hide slider initially
 	volume_slider.visible = false
+	
+	# Configure slider for vertical layout
+	if volume_slider is VSlider:
+		volume_slider.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		volume_slider.custom_minimum_size = Vector2(50, 120)  # Width, Height for vertical slider
 	
 	connect_signals()
 	update_speaker_icon()
@@ -41,7 +46,8 @@ func connect_signals():
 	# Check MusicPlayer autoload
 	if MusicPlayer:
 		print("VolumeControl: MusicPlayer found - connecting signals")
-		MusicPlayer.volume_changed.connect(_on_music_volume_changed)
+		if MusicPlayer.has_signal("volume_changed"):
+			MusicPlayer.volume_changed.connect(_on_music_volume_changed)
 	else:
 		print("VolumeControl: WARNING - MusicPlayer autoload not found!")
 
@@ -55,31 +61,35 @@ func _on_speaker_pressed():
 func expand_ui():
 	print("VolumeControl: Expanding UI")
 	is_expanded = true
+	
+	# Show slider first
 	volume_slider.visible = true
 	
-	# Set slider value
-	if MusicPlayer:
+	# Set slider value from MusicPlayer
+	if MusicPlayer and MusicPlayer.has_method("get_master_volume"):
 		volume_slider.value = MusicPlayer.get_master_volume()
 	
-	# Animate expansion
+	# Animate expansion - expand HEIGHT for vertical slider
 	var tween = create_tween()
-	tween.tween_property(container, "custom_minimum_size", Vector2(200, 50), 0.3)
+	tween.tween_property(container, "custom_minimum_size", Vector2(50, 170), 0.3)  # Button(50) + Slider(120) = 170
 
 func collapse_ui():
 	print("VolumeControl: Collapsing UI")
 	is_expanded = false
 	
+	# Animate collapse - shrink HEIGHT back to button size
 	var tween = create_tween()
 	tween.tween_property(container, "custom_minimum_size", Vector2(50, 50), 0.3)
 	tween.tween_callback(func(): volume_slider.visible = false)
 
 func _on_volume_changed(value: float):
 	print("VolumeControl: Volume changed to: ", value)
-	if MusicPlayer:
+	if MusicPlayer and MusicPlayer.has_method("set_master_volume"):
 		MusicPlayer.set_master_volume(value)
 	update_speaker_icon()
 
 func _on_music_volume_changed(volume: float):
+	# Update slider when volume changes externally
 	if volume_slider and not volume_slider.has_focus():
 		volume_slider.value = volume
 
@@ -88,9 +98,10 @@ func update_speaker_icon():
 		return
 		
 	var volume = 0.7  # Default
-	if MusicPlayer:
+	if MusicPlayer and MusicPlayer.has_method("get_master_volume"):
 		volume = MusicPlayer.get_master_volume()
 	
+	# Update icon based on volume level
 	if volume == 0.0:
 		speaker_button.text = "🔇"
 	elif volume < 0.3:

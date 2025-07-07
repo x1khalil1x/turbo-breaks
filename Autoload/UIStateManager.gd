@@ -30,6 +30,26 @@ signal modal_opened(modal_id: String)
 signal modal_closed(modal_id: String, result: Dictionary)
 signal input_focus_changed(has_focus: bool, component: Node)
 
+# Modal management signals
+signal show_modal(modal_name: String, data: Dictionary)
+signal close_modal(modal_name: String)
+signal close_all_modals()
+
+# HUD/Interface signals  
+signal set_hud_visibility(visible: bool)
+signal show_driving_hud()
+signal show_exploration_hud()
+
+# Dialog system signals
+signal show_dialog(speaker: String, text: String, choices: Array)
+signal close_dialog()
+
+# Current UI state tracking
+var current_modals: Array[String] = []
+var hud_visible: bool = true
+var current_hud_mode: String = "exploration"  # "exploration", "driving", "menu"
+var dialog_active: bool = false
+
 func _ready():
 	print("UIStateManager: Phase 1 initialized")
 	
@@ -177,7 +197,7 @@ func open_modal(modal_id: String, modal_component: Node, block_input: bool = tru
 	DebugManager.log_info("UIStateManager: Modal opened - " + modal_id)
 	return true
 
-func close_modal(modal_id: String, result: Dictionary = {}) -> bool:
+func close_modal_dialog(modal_id: String, result: Dictionary = {}) -> bool:
 	"""Close specific modal dialog"""
 	if not modal_id in modal_components:
 		DebugManager.log_warning("UIStateManager: Modal '" + modal_id + "' not found to close")
@@ -210,13 +230,13 @@ func close_top_modal(result: Dictionary = {}) -> bool:
 		return false
 	
 	var top_modal = modal_stack[-1]
-	return close_modal(top_modal, result)
+	return close_modal_dialog(top_modal, result)
 
 func clear_all_modals():
 	"""Close all open modals (for emergency cleanup)"""
 	var modals_to_close = modal_stack.duplicate()
 	for modal_id in modals_to_close:
-		close_modal(modal_id, {"force_closed": true})
+		close_modal_dialog(modal_id, {"force_closed": true})
 	
 	DebugManager.log_info("UIStateManager: All modals cleared")
 
@@ -331,4 +351,91 @@ func force_ui_state(state: UIState):
 func force_game_mode(mode: GameMode):
 	"""Debug function to force game mode"""
 	set_game_mode(mode)
-	DebugManager.log_info("UIStateManager: Forced game mode to " + GameMode.keys()[mode]) 
+	DebugManager.log_info("UIStateManager: Forced game mode to " + GameMode.keys()[mode])
+
+# === MODAL MANAGEMENT ===
+func show_inventory_modal():
+	if "inventory" not in current_modals:
+		current_modals.append("inventory")
+		show_modal.emit("inventory", {})
+
+func show_pause_modal():
+	if "pause" not in current_modals:
+		current_modals.append("pause")
+		show_modal.emit("pause", {})
+
+func show_settings_modal():
+	if "settings" not in current_modals:
+		current_modals.append("settings")
+		show_modal.emit("settings", {})
+
+func close_modal_by_name(modal_name: String):
+	if modal_name in current_modals:
+		current_modals.erase(modal_name)
+		close_modal.emit(modal_name)
+
+func close_all_open_modals():
+	current_modals.clear()
+	close_all_modals.emit()
+
+# === HUD MANAGEMENT ===
+func set_exploration_mode():
+	current_hud_mode = "exploration"
+	show_exploration_hud.emit()
+	set_hud_visibility.emit(true)
+
+func set_driving_mode():
+	current_hud_mode = "driving"
+	show_driving_hud.emit()
+	set_hud_visibility.emit(true)
+
+func set_menu_mode():
+	current_hud_mode = "menu"
+	set_hud_visibility.emit(false)
+
+func toggle_hud():
+	hud_visible = !hud_visible
+	set_hud_visibility.emit(hud_visible)
+
+# === DIALOG SYSTEM ===
+func show_character_dialog(speaker: String, text: String, choices: Array = []):
+	dialog_active = true
+	show_dialog.emit(speaker, text, choices)
+
+func close_character_dialog():
+	dialog_active = false
+	close_dialog.emit()
+
+# === SCENE TRANSITION HELPERS ===
+func prepare_for_scene_transition():
+	"""Call this before scene transitions to clean up UI state"""
+	close_all_open_modals()
+	close_character_dialog()
+
+func setup_ui_for_scene(scene_type: String):
+	"""Configure UI state for specific scene types"""
+	match scene_type:
+		"lobby":
+			set_menu_mode()
+		"exploration":
+			set_exploration_mode()
+		"driving":
+			set_driving_mode()
+		"indoor":
+			set_exploration_mode()
+
+# === DEBUG HELPERS ===
+func get_ui_state_debug_info() -> Dictionary:
+	return {
+		"current_modals": current_modals,
+		"hud_visible": hud_visible,
+		"current_hud_mode": current_hud_mode,
+		"dialog_active": dialog_active
+	}
+
+# Debug input removed to fix input action error
+# func _input(event):
+# 	# Debug key to show UI state (F6) - action "ui_debug" doesn't exist
+# 	if event.is_action_pressed("ui_debug") and DebugManager:
+# 		var state = get_ui_state_debug_info()
+# 		DebugManager.log_info("UI State: " + str(state)) 

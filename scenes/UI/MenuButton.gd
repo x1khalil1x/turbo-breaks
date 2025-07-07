@@ -1,5 +1,5 @@
 extends Button
-class_name MenuButton
+class_name GameMenuButton
 
 signal menu_button_pressed(button_name: String)
 
